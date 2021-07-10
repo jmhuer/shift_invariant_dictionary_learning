@@ -30,57 +30,30 @@
 
 \newcommand\BibTeX{B\textsc{ib}\TeX}
 
-\title{Instructions for NLP4MusA 2020 Proceedings}
+\title{Shift-Invariant Dictionary Learning using TCN-WTA Autoencoders for Discovering Musical Relations }
 
-\author{First Author \\
-  Affiliation / Address line 1 \\
+\author{Juan M Huerta \\
+  UT Austin / Address line 1 \\
   Affiliation / Address line 2 \\
   Affiliation / Address line 3 \\
-  \texttt{email@domain} \\\And
+  \texttt{jmhuer@gmail.com} \\\And
   Second Author \\
-  Affiliation / Address line 1 \\
+  UT Austin / Address line 1 \\
   Affiliation / Address line 2 \\
   Affiliation / Address line 3 \\
-  \texttt{email@domain} \\}
+  \texttt{jmhuer@gmail.com} \\}
 
 \date{}
 
 \begin{document}
 \maketitle
 \begin{abstract}
-  This document contains the instructions for preparing a camera-ready
-  manuscript for the proceedings of NLP4MusA 2020. The document itself
-  conforms to its own specifications, and is therefore an example of
-  what your manuscript should look like. These instructions should be
-  used for both papers submitted for review and for final versions of
-  accepted papers.  Authors are asked to conform to all the directions
-  reported in this document.
+Music hierarchical temporal structure is full of shift invariant patters. The standard methods to encode a generic sequence is usually achieved by recurrent architectures or more recently with transformer that adopts the mechanism of attention. However, RNNs and transformers models do not take advantage of this prior information, or attempt to find repetitive building blocks. Temporal Convolutional Nets can be used to extract shift invariant features of a specific length defined by the kernel size. Using a fully convolutional temporal autoencoder we can find a shift invariant dictionary that can recreate multivariate musical signals. This architecture can strided with no overlap, and be combined to K-WTA activation function to obtain a sparse dictionary promote a sparse representation. In addition to gaining insight into this shift invariant patters, some results indicate that CNN architectures can outperform recurrent networks on specific task and provide server other advantages across a diverse range of tasks and datasets, while demonstrating longer effective memory. We show a few applications of this sparse representation on task to find key signatures, time signatures, artist detection, and music generation. To assist related work, we have made code available. 
 \end{abstract}
 
-\section{Credits}
+\section{Introduction}
 
-This document has been adapted from the instructions
-for earlier NLP4MusA proceedings,
-including those for 
-ACL 2019 by Douwe Kiela and Ivan Vuli\'{c},
-NAACL 2019 by Stephanie Lukin and Alla Roskovskaya, 
-ACL 2018 by Shay Cohen, Kevin Gimpel, and Wei Lu, 
-NAACL 2018 by Margaret Michell and Stephanie Lukin,
-2017/2018 (NA)ACL bibtex suggestions from Jason Eisner,
-ACL 2017 by Dan Gildea and Min-Yen Kan, 
-NAACL 2017 by Margaret Mitchell, 
-ACL 2012 by Maggie Li and Michael White, 
-those from ACL 2010 by Jing-Shing Chang and Philipp Koehn, 
-those for ACL 2008 by JohannaD. Moore, Simone Teufel, James Allan, and Sadaoki Furui, 
-those for ACL 2005 by Hwee Tou Ng and Kemal Oflazer, 
-those for ACL 2002 by Eugene Charniak and Dekang Lin, 
-and earlier ACL and EACL formats.
-Those versions were written by several
-people, including John Chen, Henry S. Thompson and Donald
-Walker. Additional elements were taken from the formatting
-instructions of the \emph{International Joint Conference on Artificial
-  Intelligence} and the \emph{Conference on Computer Vision and
-  Pattern Recognition}.
+What are the benefits of having sparse models? First, as we will show, they can be used to encode prior knowledge in the sparsity patterns. Second, they are lightweight— requiring less memory to store and allowing faster inference and easier interpretability. Nowadays, we often start with models with hundreds of millions to billions of param- eters. Sparsity provides a way to completely discard some of these parameters in an informed and principled manner, resulting in smaller model size. For example, mobile applications (e.g., Google Now, Siri, etc.) stand to benefit from smaller models since mo- bile phones typically have less storage and computing power than standard computers. Sparse models come with their own challenges. New varieties of sparse models often require a specialized optimization method, as we will see throughout this thesis. Last, some of the state-of-the-art methods for benchmarks tasks in various application areas such as computational biology (Kim and Xing, 2008) and computer vision are sparse models (Ranzato et al., 2006; Lin and Kung, 2014), empirically demonstrating that they can also lead to statistical improvements if the prior knowledge is correct (Stojnic et al., 2009).
 
 \section{Introduction}
 
