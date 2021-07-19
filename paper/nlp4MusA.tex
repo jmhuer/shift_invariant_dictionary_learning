@@ -55,7 +55,7 @@ Music hierarchical temporal structure is full of shift invariant patters. The st
 
 What are the benefits of having sparse models? First, as we will show, they can be used to encode prior knowledge in the sparsity patterns. Second, they are lightweight— requiring less memory to store and allowing faster inference and easier interpretability. Nowadays, we often start with models with hundreds of millions to billions of param- eters. Sparsity provides a way to completely discard some of these parameters in an informed and principled manner, resulting in smaller model size. For example, mobile applications (e.g., Google Now, Siri, etc.) stand to benefit from smaller models since mo- bile phones typically have less storage and computing power than standard computers. Sparse models come with their own challenges. New varieties of sparse models often require a specialized optimization method, as we will see throughout this thesis. Last, some of the state-of-the-art methods for benchmarks tasks in various application areas such as computational biology (Kim and Xing, 2008) and computer vision are sparse models (Ranzato et al., 2006; Lin and Kung, 2014), empirically demonstrating that they can also lead to statistical improvements if the prior knowledge is correct (Stojnic et al., 2009).
 
-\section{Introduction}
+\section{Background}
 
 The following instructions are directed to authors of papers submitted
 to NLP4MusA or accepted for publication in its proceedings. All
@@ -64,7 +64,7 @@ required to provide a Portable Document Format (PDF) version of their
 papers. \textbf{The proceedings are designed for printing on A4
 paper.}
 
-\section{General Instructions}
+\section{Shift-Invariant Dictionary Learning}
 
 Manuscripts must be in two-column format. Exceptions to the
 two-column format include the title, authors' names and complete
@@ -83,7 +83,7 @@ By uncommenting {\small\verb|\aclfinalcopy|} at the top of this
 The review process is double-blind, so do not include any author information (names, addresses) when submitting a paper for review.  
 However, you should maintain space for names and addresses so that they will fit in the final (accepted) version.  The NLP4MusA \LaTeX\ style will create a titlebox space of 2.5in for you when {\small\verb|\aclfinalcopy|} is commented out.  
 
-\subsection{The Ruler}
+\subsection{Temporal Convolutional Networks }
 The NLP4MusA style defines a printed ruler which should be presented in the
 version submitted for review.  The ruler is provided in order that
 reviewers may comment on particular lines in the paper without
@@ -100,7 +100,7 @@ looks ugly. In most cases one would expect that the approximate
 location will be adequate, although you can also use fractional
 references (\emph{e.g.}, the first paragraph on this page ends at mark $108.5$).
 
-\subsection{Electronically-available resources}
+\subsection{K-WTA Autoencoders}
 
 NLP4MusA provides this description in \LaTeX2e{} (\texttt{\small nlp4MusA.tex}) and PDF
 format (\texttt{\small nlp4MusA.pdf}), along with the \LaTeX2e{} style file used to
@@ -111,7 +111,7 @@ These files are all available at
  We strongly recommend the use of these style files, which have been
 appropriately tailored for the NLP4MusA 2020 proceedings.
 
-\subsection{Format of Electronic Manuscript}
+\subsection{Sparse Representations}
 \label{sect:pdf}
 
 For the production of the electronic manuscript you must use Adobe's
@@ -290,18 +290,13 @@ Do not number subsubsections.
 
 \begin{table*}[t!]
 \centering
-\begin{tabular}{lll}
-  output & natbib & previous ACL style files\\
+\begin{tabular}{llll}
+  Dataset & Size & Intrumentation  & Encoding \\
   \hline
-  \citep{Gusfield:97} & \verb|\citep| & \verb|\cite| \\
-  \citet{Gusfield:97} & \verb|\citet| & \verb|\newcite| \\
-  \citeyearpar{Gusfield:97} & \verb|\citeyearpar| & \verb|\shortcite| \\
+  MAESTRO \citep{Gusfield:97} & 1256 & piano  & piano \\
+  Groove \citet{Gusfield:97} &1200 & drum  & piano \\
 \end{tabular}
-\caption{Citation commands supported by the style file.
-  The citation style is based on the natbib package and
-  supports all natbib citation commands.
-  It also supports commands defined in previous ACL style files
-  for compatibility.
+\caption{Datasets used to experiment with fully convolutional temporal autoencoder model. All datasets used are MIDI format 
   }
 \end{table*}
 
@@ -475,7 +470,7 @@ distinctions. A simple criterion: All curves and points in your figures should b
 %% \url{http://dlmf.nist.gov/LaTeXML/manual/included.bindings}
 % END: remove
 
-\section{Translation of non-English Terms}
+\section{Experiemnt}
 
 It is also advised to supplement non-English characters and terms
 with appropriate transliterations and/or translations
@@ -483,7 +478,7 @@ since not all readers understand all such characters and terms.
 Inline transliteration or translation can be represented in
 the order of: original-form transliteration ``translation''.
 
-\section{Length of Submission}
+\subsection{Datasets}
 \label{sec:length}
 
 The NLP4MusA main conference accepts submissions of extended abstracts and short papers.
