@@ -1,6 +1,6 @@
 import torch
 
-from processor import RANGE_NOTE_ON, RANGE_NOTE_OFF, RANGE_VEL, RANGE_TIME_SHIFT
+from midi.processor import RANGE_NOTE_ON, RANGE_NOTE_OFF, RANGE_VEL, RANGE_TIME_SHIFT
 
 SEPERATOR               = "========================="
 
