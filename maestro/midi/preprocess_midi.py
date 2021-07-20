@@ -39,10 +39,18 @@ def prep_midi(maestro_root, output_dir):
     val_count   = 0
     test_count  = 0
 
+    ##by me
+    composer_map = {"f_name": [], "composer": []}
+    #
+
     for piece in maestro_json:
         mid         = os.path.join(maestro_root, piece["midi_filename"])
         split_type  = piece["split"]
         f_name      = mid.split("/")[-1] + ".pickle"
+        #by me
+        composer_map["f_name"].append(f_name)
+        composer_map["composer"].append(piece["canonical_composer"])
+
 
         if(split_type == "train"):
             o_file = os.path.join(train_dir, f_name)
@@ -70,6 +78,12 @@ def prep_midi(maestro_root, output_dir):
     print("Num Train:", train_count)
     print("Num Val:", val_count)
     print("Num Test:", test_count)
+
+    # save dictionary map of f_name and composer
+    my_stream = open("composer_map.pickle", "wb")
+    pickle.dump(composer_map, my_stream)
+    my_stream.close()
+
     return True
 
 

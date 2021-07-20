@@ -24,13 +24,19 @@ class EPianoDataset(Dataset):
     ----------
     """
 
-    def __init__(self, root, max_seq=2048, random_seq=True):
+    def __init__(self, root, max_seq=2048, random_seq=True, composer_map_path=None):
         self.root       = root
         self.max_seq    = max_seq
         self.random_seq = random_seq
 
         fs = [os.path.join(root, f) for f in os.listdir(self.root)]
         self.data_files = [f for f in fs if os.path.isfile(f)]
+        if composer_map_path is not None:
+            with open(composer_map_path, "rb") as handle:
+                composer_map = pickle.load(handle)
+            self.composer_data = [composer_map["composer"][composer_map["f_name"].index(f)] for f in os.listdir(self.root)]
+
+
 
     # __len__
     def __len__(self):
@@ -65,7 +71,8 @@ class EPianoDataset(Dataset):
         # x, tgt = process_midi(raw_mid, self.max_seq, self.random_seq)
 
         return raw_mid
-
+    def get_composer(self, idx):
+        return composer_data[idx] 
 # process_midi
 def process_midi(raw_mid, max_seq, random_seq):
     """
@@ -115,7 +122,7 @@ def process_midi(raw_mid, max_seq, random_seq):
 
 
 # create_epiano_datasets
-def create_epiano_datasets(dataset_root, max_seq, random_seq=True):
+def create_epiano_datasets(dataset_root, max_seq, random_seq=True, composer_map_path=None):
     """
     ----------
     Author: Damon Gwinn
@@ -129,9 +136,9 @@ def create_epiano_datasets(dataset_root, max_seq, random_seq=True):
     val_root = os.path.join(dataset_root, "val")
     test_root = os.path.join(dataset_root, "test")
 
-    train_dataset = EPianoDataset(train_root, max_seq, random_seq)
-    val_dataset = EPianoDataset(val_root, max_seq, random_seq)
-    test_dataset = EPianoDataset(test_root, max_seq, random_seq)
+    train_dataset = EPianoDataset(train_root, max_seq, random_seq ,composer_map_path=composer_map_path)
+    val_dataset = EPianoDataset(val_root, max_seq, random_seq ,composer_map_path=composer_map_path)
+    test_dataset = EPianoDataset(test_root, max_seq, random_seq ,composer_map_path=composer_map_path)
 
     return train_dataset, val_dataset, test_dataset
 
