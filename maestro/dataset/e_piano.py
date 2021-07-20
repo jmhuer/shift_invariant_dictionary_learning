@@ -72,7 +72,7 @@ class EPianoDataset(Dataset):
 
         return raw_mid
     def get_composer(self, idx):
-        return composer_data[idx] 
+        return self.composer_data[idx] 
 # process_midi
 def process_midi(raw_mid, max_seq, random_seq):
     """
