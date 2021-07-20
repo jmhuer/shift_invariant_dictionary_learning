@@ -107,17 +107,19 @@ We show a few applications of our TCN k-WTA model
 We use two distinct datasets: MAESTRO  \citep{Gusfield:97}, and  grove Groove  \citep{Gusfield:97} . See table 2 for more details on the datasets used. We also use distinct MIDI representations for each dataset. 
 
 
-\begin{table*}[t!]
-\centering
-\begin{tabular}{llll}
-  Dataset & Size & Intrumentation  & Encoding \\
-  \hline
-  MAESTRO \citep{Gusfield:97} & 1256 & piano  & piano \\
-  Groove \citet{Gusfield:97} &1200 & drum  & piano \\
-\end{tabular}
-\caption{Datasets used to experiment with fully convolutional temporal autoencoder model. All datasets used are MIDI format 
-  }
+
+\begin{table*}[ht]
+    \centering
+    \begin{tabular}{p{0.15\linewidth} | p{0.1\linewidth} | p{0.1\linewidth}  | p{0.45\linewidth} }
+      Dataset  & Size  & Instrument &  Encoding\\ \hline
+      MAESTRO \citep{Gusfield:97}  & 1020 (Hrs)   & Piano &  One-hot encoding over 388 different MIDI events \\
+        \hline
+        Groove \citet{Gusfield:97} & 3.6 (Hrs)  & Drum &  T timesteps (one per 16th note) and 27 MIDI events\\
+    \end{tabular}
+    \caption{Datasets used to experiment with fully convolutional temporal autoencoder model. All datasets used are MIDI format }
+    \label{tab:my_label}
 \end{table*}
+
 
 
 
@@ -214,7 +216,7 @@ be no longer than 200 words. The abstract text should be in 10 point font.
 
 \begin{figure*}[ht]
   \includegraphics[width=\linewidth]{/Users/juanhuerta/personal_projects/code/shift_invariant_dictionary_learning/paper/images/newplot.png}
-  \caption{A boat.}
+  \caption{After training the model we can use it to encode datapoints of arbitrary length unsupervised stylistic segmentation. We use PCA on the average sparse code for each piece. We project into 2 dimensional sparse to visualize }
   \label{fig:boat1}
 \end{figure*}
 
