@@ -17,6 +17,8 @@
 \usepackage{times}
 \usepackage{latexsym}
 \usepackage{graphicx}
+\usepackage{mathtools}  % amsmath with extensions
+\usepackage{amsfonts}  % (otherwise \mathbb does nothing)
 
 \usepackage{url}
 
@@ -59,6 +61,15 @@ What are the benefits of having sparse models? First, as we will show, they can 
 
 \section{Related Work}
 
+\subsection{ Dictionary learning  }
+Given the data: $ X=\left[x_{1}, \ldots, x_{K}\right], x_{i} \in \mathbb{R}^{d} $ 
+We want a dictionary $\mathbf{D} \in \mathbb{R}^{d \times n}: D=\left[d_{1}, \ldots, d_{n}\right]$ 
+And a representation $R=\left[r_{1}, \ldots, r_{K}\right], r_{i} \in \mathbb{R}^{n}$ such that the reconstruction $\|X-\mathbf{D} R\|_{F}^{2}$ is minimized and $r_{i}$ are sparsed. The optimization problem can be formulated as: 
+
+$\underset{\mathbf{D} \in \mathcal{C}, r_{i} \in \mathbb{R}^{n}, \lambda>0} {\operatorname{argmin}} \sum_{i=1}^{K}\left\|x_{i}-\mathbf{D} r_{i}\right\|_{2}^{2}+\lambda\left\|r_{i}\right\|_{0}$ \\   $\mathcal{C} \equiv\left\{\mathbf{D} \in \mathbb{R}^{d \times n}:\left\|d_{i}\right\|_{2} \leq 1 \forall i=1, \ldots, n\right\} $
+\\ \\
+However this formulation does not look for shift invariant features. 
+
 \subsection{ Shift-invariant dictionary learning (SIDL)  }
 
 In previous works, various shift-invariant dictionary learning (SIDL) methods have been employed to discover local patterns that are embedded across a longer time series in sequential data such as audio signals. While [Shift-Invariant Sparse Coding for Audio Classification] employs shift-
@@ -75,17 +86,35 @@ style files, please arrange for an equivalent ruler to
 appear on the final output pages.  The presence or absence of the ruler
 should not change the appearance of any other content on the page.  The
 camera ready copy should not contain a ruler. (\LaTeX\ users may uncomment the {\small\verb|\aclfinalcopy|} command in the document preamble.)  
+\\
+\\
+\textbf{Benifits of TCN over RNNs  \citep{Gusfield:97}} 
+\begin{itemize}
+\item Low dimensionality feature extraction 
+\item Music Simplification \cite{Ando2005}.
+\item Music Decomposition \cite{Ando2005}.
+\item Compressing music \cite{borsch2011}.
+\end{itemize}
 
-Reviewers: note that the ruler measurements do not align well with
-lines in the paper -- this turns out to be very difficult to do well
-when the paper contains many figures and equations, and, when done,
-looks ugly. In most cases one would expect that the approximate
-location will be adequate, although you can also use fractional
-references (\emph{e.g.}, the first paragraph on this page ends at mark $108.5$).
 
 \subsection{TCN K-WTA Autoencoders}
 
 In our study, we use a fully convolutional temporal autoencoder to find shift-invariant dictionaries while ensuring sparsity via the K-WTA activation function [Winner-Take-All Autoencoders]. The use of K-WTA in conjunction with dictionary learning was inspired by [Towards Contrastive Learning for Time-Series] where the K-WTA’s ability to achieve sparse representations is explored in the context of constructive learning for time-series data. The use of Temporal Convolutional Nets was encouraged by various advantages that convolutional architectures bring for sequence modeling over recurrent networks as illustrated in [An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling]. Some of the most notable benefits include longer effective memory and low memory requirement when training. We explore these benefits for the purpose of music, which inherently requires a longer history due to musical temporal structure. Moreover, the low memory requirement of the convolutional architecture combined with a sparse representation in dictionary learning presents a strong potential for lighter and faster modeling with a high prospect of being applied to a real-time and on-line dictionary learning in the future. In this paper, we propose SIDL using TCN WTA-Autoencoders for discovering music relations—salient features of a specific performer or music, and illustrate potential applications in music analysis and creation. 
+
+
+
+\begin{table*}[ht]
+    \centering
+    \begin{tabular}{p{0.15\linewidth} | p{0.15\linewidth} | p{0.1\linewidth}  | p{0.45\linewidth} }
+      Dataset  & Size  & Instrument &  Encoding\\ \hline
+      MAESTRO \citep{Gusfield:97}  & 1020 (Hrs)   & Piano &  One-hot encoding over 388 different MIDI events. Every datapoint here has an arbitrary length \\
+        \hline
+        Groove \citet{Gusfield:97} & 3.6 (Hrs)  & Drum &  T timesteps (one per 16th note) and 27 MIDI events. We use fixed length 64 time step sections\\
+    \end{tabular}
+    \caption{Datasets used to experiment with fully convolutional temporal autoencoder model. All datasets used are MIDI format }
+    \label{tab:my_label}
+\end{table*}
+
 
 
 
@@ -108,24 +137,19 @@ We use two distinct datasets: MAESTRO  \citep{Gusfield:97}, and  grove Groove  \
 
 
 
-\begin{table*}[ht]
-    \centering
-    \begin{tabular}{p{0.15\linewidth} | p{0.1\linewidth} | p{0.1\linewidth}  | p{0.45\linewidth} }
-      Dataset  & Size  & Instrument &  Encoding\\ \hline
-      MAESTRO \citep{Gusfield:97}  & 1020 (Hrs)   & Piano &  One-hot encoding over 388 different MIDI events \\
-        \hline
-        Groove \citet{Gusfield:97} & 3.6 (Hrs)  & Drum &  T timesteps (one per 16th note) and 27 MIDI events\\
-    \end{tabular}
-    \caption{Datasets used to experiment with fully convolutional temporal autoencoder model. All datasets used are MIDI format }
-    \label{tab:my_label}
-\end{table*}
-
-
-
-
 \subsection{Model Implementation}
+Our model implementation differs slightly for the different datasets used: 
+\\
+\\
+\textbf{MAESTRO} 
+\\
+Our TCN-KWTA Autoencoder is designed with [1, 8, 16, 32, 1000, 1] layers. The sparse representation is the layer before the last. Our WTA activation function is in the layer before the last. We also use a decaying WTA activation fucntions
+\\
+\\
+\textbf{GROOVE} 
+\\
+Our TCN-KWTA Autoencoder is designed with [1, 8, 16, 32, 1000, 1] layers. The sparse representation is the layer before the last. Our WTA activation function is in the layer before the last. We also use a decaying WTA activation fucntions
 
-Our TCN-KWTA Autoencoder is designed with [1, 8, 16, 32, 1000, 1] layers. The sparse representation is the layer before the last. Our WTA activation function is in the layer before the last. 
 
 \subsection{Music Reconstructions}
 \label{ssec:first}
@@ -148,10 +172,15 @@ consistent.
 Type the abstract at the beginning of the first
 column. The width of the abstract text should be smaller than the
 width of the columns for the text in the body of the paper by about
-0.6 cm on each side. Center the word \textbf{Abstract} in a 12 point bold
-font above the body of the abstract. The abstract should be a concise
-summary of the general thesis and conclusions of the paper. It should
-be no longer than 200 words. The abstract text should be in 10 point font.
+0.6 cm on each side. 
+
+\textbf{Example applications} 
+\begin{itemize}
+\item Low dimensionality feature extraction 
+\item Music Simplification \cite{Ando2005}.
+\item Music Decomposition \cite{Ando2005}.
+\item Compressing music \cite{borsch2011}.
+\end{itemize}
 
 
 
@@ -200,6 +229,12 @@ Do not number sub-subsections.
 % Any preliminary non-archival versions of submitted papers should be listed in the submission form but not in the review version of the paper. NLP4MusA reviewers are generally aware that authors may present preliminary versions of their work in other venues, but will not be provided the list of previous presentations from the submission form. 
 % END: remove
 
+\begin{figure*}[ht]
+  \includegraphics[width=\linewidth]{/Users/juanhuerta/personal_projects/code/shift_invariant_dictionary_learning/paper/images/newplot.png}
+  \caption{After training the model we can use it to encode datapoints of arbitrary length unsupervised stylistic segmentation. We use PCA on the average sparse code for each piece. We project into 2 dimensional sparse to visualize }
+  \label{fig:boat1}
+\end{figure*}
+
 \subsection{Genrating Piano Music }
 
 Type the abstract at the beginning of the first
@@ -213,12 +248,6 @@ be no longer than 200 words. The abstract text should be in 10 point font.
 
 
 \subsection{Unsupervised Stylistic Segmentation }
-
-\begin{figure*}[ht]
-  \includegraphics[width=\linewidth]{/Users/juanhuerta/personal_projects/code/shift_invariant_dictionary_learning/paper/images/newplot.png}
-  \caption{After training the model we can use it to encode datapoints of arbitrary length unsupervised stylistic segmentation. We use PCA on the average sparse code for each piece. We project into 2 dimensional sparse to visualize }
-  \label{fig:boat1}
-\end{figure*}
 
 Type and label section and subsection headings in the
 style shown on the present document.  Use numbered sections (Arabic
@@ -237,6 +266,7 @@ Do not number sub-subsections.
 See corresponding .bib file for further details.
 
 Submissions should accurately reference prior and related work, including code and data. If a piece of prior work appeared in multiple venues, the version that appeared in a refereed, archival venue should be referenced. If multiple versions of a piece of prior work exist, the one used by the authors should be referenced. Authors should not rely on automated citation indices to provide accurate references for prior and related work.
+
 
 
 \section{Discussion}
@@ -300,20 +330,6 @@ numbering over to letters.
 \section{Supplemental Material}
 \label{sec:supplemental}
 Submissions may include non-readable supplementary material used in the work and described in the paper. Any accompanying software and/or data should include licenses and documentation of research review as appropriate. Supplementary material may report preprocessing decisions, model parameters, and other details necessary for the replication of the experiments reported in the paper. Seemingly small preprocessing decisions can sometimes make a large difference in performance, so it is crucial to record such decisions to precisely characterize state-of-the-art methods. 
-
-Nonetheless, supplementary material should be supplementary (rather
-than central) to the paper. \textbf{Submissions that misuse the supplementary 
-material may be rejected without review.}
-Supplementary material may include explanations or details
-of proofs or derivations that do not fit into the paper, lists of
-features or feature templates, sample inputs and outputs for a system,
-pseudo-code or source code, and data. (Source code and data should
-be separate uploads, rather than part of the paper).
-
-The paper should not rely on the supplementary material: while the paper
-may refer to and cite the supplementary material and the supplementary material will be available to the
-reviewers, they will not be asked to review the
-supplementary material.
 
 
 \end{document}
