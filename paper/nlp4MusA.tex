@@ -241,17 +241,7 @@ be no longer than 200 words. The abstract text should be in 10 point font.
 
 If we train with a dataset that includes multiple composers we should expect to find that different composers utilize different shift invariant patters. To visualize kernel usage we average out the rows of our sparse code. This should provide us with the average dictionary word value. If we do PCA on the average dictionary vector and reduce dimensionality to 2D. We obtain the plot in Figure 2
 
-
-\begin{itemize}
-\item Example citing an arxiv paper: \cite{rasooli-tetrault-2015}. 
-\item Example article in journal citation: \cite{Ando2005}.
-\item Example article in proceedings, with location: \cite{borsch2011}.
-\item Example article in proceedings, without location: \cite{andrew2007scalable}.
-\end{itemize}
-See corresponding .bib file for further details.
-
-Submissions should accurately reference prior and related work, including code and data. If a piece of prior work appeared in multiple venues, the version that appeared in a refereed, archival venue should be referenced. If multiple versions of a piece of prior work exist, the one used by the authors should be referenced. Authors should not rely on automated citation indices to provide accurate references for prior and related work.
-
+It is also possible to use this average kernel usage for each composer and make comparisons for composers, such as most similar or disimilar between styles or comparisons. 
 
 
 \section{Discussion}
