@@ -78,29 +78,19 @@ invariant sparse coding with a convolutional optimization and gradient descent m
 
 
 \subsection{Temporal Convolutional Networks (TCN) }
-The NLP4MusA style defines a printed ruler which should be presented in the
-version submitted for review.  The ruler is provided in order that
-reviewers may comment on particular lines in the paper without
-circumlocution.  If you are preparing a document without the provided
-style files, please arrange for an equivalent ruler to
-appear on the final output pages.  The presence or absence of the ruler
-should not change the appearance of any other content on the page.  The
-camera ready copy should not contain a ruler. (\LaTeX\ users may uncomment the {\small\verb|\aclfinalcopy|} command in the document preamble.)  
-\\
+ Some of the most notable benefits include longer effective memory and low memory requirement when training. We explore these benefits for the purpose of music, which inherently requires a longer history due to musical temporal structure. Moreover, the low memory requirement of the convolutional architecture combined with a sparse representation in dictionary learning presents a strong potential for lighter and faster modeling with a high prospect of being applied to a real-time and on-line dictionary learning in the future. In this paper, we propose SIDL using TCN WTA-Autoencoders for discovering music relations—salient features of a specific performer or music, and illustrate potential applications in music analysis and creation. 
 \\
 \textbf{Benifits of TCN over RNNs  \citep{Gusfield:97}} 
 \begin{itemize}
-\item Low dimensionality feature extraction 
-\item Music Simplification \cite{Ando2005}.
-\item Music Decomposition \cite{Ando2005}.
-\item Compressing music \cite{borsch2011}.
+\item Parallelism.  
+\item Flexible receptive field size
+\item Low memory requirement for training
 \end{itemize}
 
 
-\subsection{TCN K-WTA Autoencoders}
+\subsection{SIDL by TCN K-WTA Autoencoders}
 
-In our study, we use a fully convolutional temporal autoencoder to find shift-invariant dictionaries while ensuring sparsity via the K-WTA activation function [Winner-Take-All Autoencoders]. The use of K-WTA in conjunction with dictionary learning was inspired by [Towards Contrastive Learning for Time-Series] where the K-WTA’s ability to achieve sparse representations is explored in the context of constructive learning for time-series data. The use of Temporal Convolutional Nets was encouraged by various advantages that convolutional architectures bring for sequence modeling over recurrent networks as illustrated in [An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling]. Some of the most notable benefits include longer effective memory and low memory requirement when training. We explore these benefits for the purpose of music, which inherently requires a longer history due to musical temporal structure. Moreover, the low memory requirement of the convolutional architecture combined with a sparse representation in dictionary learning presents a strong potential for lighter and faster modeling with a high prospect of being applied to a real-time and on-line dictionary learning in the future. In this paper, we propose SIDL using TCN WTA-Autoencoders for discovering music relations—salient features of a specific performer or music, and illustrate potential applications in music analysis and creation. 
-
+In our study, we use a fully convolutional temporal autoencoder to find shift-invariant dictionaries while ensuring sparsity via the K-WTA activation function [Winner-Take-All Autoencoders]. The use of K-WTA in conjunction with dictionary learning was inspired by [Towards Contrastive Learning for Time-Series] where the K-WTA’s ability to achieve sparse representations is explored in the context of constructive learning for time-series data. The use of Temporal Convolutional Nets was encouraged by various advantages that convolutional architectures bring for sequence modeling over recurrent networks as illustrated in [An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling].
 
 
 \begin{table*}[ht]
@@ -138,9 +128,14 @@ We use two distinct datasets: MAESTRO  \citep{Gusfield:97}, and  grove Groove  \
 
 
 \subsection{Model Implementation}
-Our model implementation differs slightly for the different datasets used: 
-\\
-\\
+Our model implementation differs slightly for the different datasets used. 
+
+\begin{figure}[ht]
+  \includegraphics[width=\linewidth]{/Users/juanhuerta/personal_projects/code/shift_invariant_dictionary_learning/paper/images/tnc.png}
+  \caption{After training the model we can use it to encode datapoints of arbitrary length unsupervised stylistic segmentation. We use PCA on the average sparse code for each piece. We project into 2 dimensional sparse to visualize }
+  \label{fig:boat1}
+\end{figure}
+
 \textbf{MAESTRO} 
 \\
 Our TCN-KWTA Autoencoder is designed with [1, 8, 16, 32, 1000, 1] layers. The sparse representation is the layer before the last. Our WTA activation function is in the layer before the last. We also use a decaying WTA activation fucntions
@@ -186,12 +181,7 @@ width of the columns for the text in the body of the paper by about
 
 \subsection{Genrating Structured Drums}
 
-Type and label section and subsection headings in the
-style shown on the present document.  Use numbered sections (Arabic
-numerals) in order to facilitate cross references. Number subsections
-with the section number and the subsection number separated by a dot,
-in Arabic numerals.
-Do not number sub-subsections.
+If we have a specific musical structure we would like to follow. For example, 4/4 120bpm. We can train inject prior information into our 1D convolutions. For example, we can make each kernel the length of 1/4 beat. This allows for better dictionary learning since repetition is expected to happen at this time steps. We can stitch together musical sections, to create bars of music. and desing a specfic structure 
 
 
 
@@ -249,12 +239,7 @@ be no longer than 200 words. The abstract text should be in 10 point font.
 
 \subsection{Unsupervised Stylistic Segmentation }
 
-Type and label section and subsection headings in the
-style shown on the present document.  Use numbered sections (Arabic
-numerals) in order to facilitate cross references. Number subsections
-with the section number and the subsection number separated by a dot,
-in Arabic numerals.
-Do not number sub-subsections.
+If we train with a dataset that includes multiple composers we should expect to find that different composers utilize different shift invariant patters. To visualize kernel usage we average out the rows of our sparse code. This should provide us with the average dictionary word value. If we do PCA on the average dictionary vector and reduce dimensionality to 2D. We obtain the plot in Figure 2
 
 
 \begin{itemize}
@@ -272,11 +257,13 @@ Submissions should accurately reference prior and related work, including code a
 \section{Discussion}
 \label{ssec:discussion}
 
-In an effort to accommodate people who are color-blind (as well as those printing
-to paper), grayscale readability for all accepted papers will be
-encouraged.  Color is not forbidden, but authors should ensure that
-tables and figures do not rely solely on color to convey critical
-distinctions. A simple criterion: All curves and points in your figures should be clearly distinguishable without color.
+There are multiple benefits to this sequence learning methodology. The first is such as simplicity and felxibilty, the TCN autoencocoder is a simple to implemnt arquitecture and requires any abitrary size combinations of multivariate musical signals.Also the size of the model for both Magenta and Groove are 877 KB and 750 KB respectively. In comparison, googles Performance RNN--LSTM-based recurrent neural network--is ~25MB, and other transformer based models can be GBs in size. 
+
+In addition, our method allows for incorporating known structural information into a model prior to trainng. and finally we have the most imporant benifit is the sparse representatoin and learned dictionaries, as we have shown this can be used for mutiple applications and analysis. 
+
+The performance on the recustruction and generation on for the drum Grove dataset  was significantly better than the piano (MAESTRO dataset). This is in part because the dataset was pre-proccessed to match with kernel size, and the drum sections were the same length and have lower dimensionality. 
+
+
 
 % Min: no longer used as of ACL 2019, following ACL exec's decision to
 % remove this extra workflow that was not executed much.
@@ -303,6 +290,8 @@ distinctions. A simple criterion: All curves and points in your figures should b
 % END: remove
 
 \section{Conclusion}
+
+We have shown that TCN-kWTA autoencoder can learn a sparse representation of abitrary length musical signal. This shift invariant, sparse representation can be used to analyze, preprocess, or generate musical content in a structured, or unsctuctured way
 
 It is also advised to supplement non-English characters and terms
 with appropriate transliterations and/or translations
