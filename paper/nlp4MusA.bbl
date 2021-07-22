@@ -1,54 +1,63 @@
-\begin{thebibliography}{9}
+\begin{thebibliography}{8}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
-\bibitem[{Aho and Ullman(1972)}]{Aho:72}
-Alfred~V. Aho and Jeffrey~D. Ullman. 1972.
-\newblock \emph{The Theory of Parsing, Translation and Compiling}, volume~1.
-\newblock Prentice-Hall, Englewood Cliffs, NJ.
+\bibitem[{Gillick et~al.(2019)Gillick, Roberts, Engel, Eck, and
+  Bamman}]{groove2019}
+Jon Gillick, Adam Roberts, Jesse Engel, Douglas Eck, and David Bamman. 2019.
+\newblock Learning to groove with inverse sequence transformations.
+\newblock In \emph{International Conference on Machine Learning (ICML)}.
 
-\bibitem[{{American Psychological Association}(1983)}]{APA:83}
-{American Psychological Association}. 1983.
-\newblock \emph{Publications Manual}.
-\newblock American Psychological Association, Washington, DC.
+\bibitem[{Grosse et~al.(2007)Grosse, Raina, Kwong, and Ng}]{Grosse2007}
+Roger Grosse, Rajat Raina, Helen Kwong, and Andrew~Y. Ng. 2007.
+\newblock {Shift-invariant sparse coding for audio classification}.
+\newblock In \emph{Proceedings of the 23rd Conference on Uncertainty in
+  Artificial Intelligence, UAI 2007}.
 
-\bibitem[{Ando and Zhang(2005)}]{Ando2005}
-Rie~Kubota Ando and Tong Zhang. 2005.
-\newblock A framework for learning predictive structures from multiple tasks
-  and unlabeled data.
-\newblock \emph{Journal of Machine Learning Research}, 6:1817--1853.
+\bibitem[{Hawthorne et~al.(2019)Hawthorne, Stasyuk, Roberts, Simon, Huang,
+  Dieleman, Elsen, Engel, and Eck}]{hawthorne2018enabling}
+Curtis Hawthorne, Andriy Stasyuk, Adam Roberts, Ian Simon, Cheng-Zhi~Anna
+  Huang, Sander Dieleman, Erich Elsen, Jesse Engel, and Douglas Eck. 2019.
+\newblock \href {https://openreview.net/forum?id=r1lYRjC9F7} {Enabling
+  factorized piano music modeling and generation with the {MAESTRO} dataset}.
+\newblock In \emph{International Conference on Learning Representations}.
 
-\bibitem[{Andrew and Gao(2007)}]{andrew2007scalable}
-Galen Andrew and Jianfeng Gao. 2007.
-\newblock Scalable training of {L1}-regularized log-linear models.
-\newblock In \emph{Proceedings of the 24th International Conference on Machine
-  Learning}, pages 33--40.
+\bibitem[{Koniusz et~al.(2017)Koniusz, Yan, Gosselin, and
+  Mikolajczyk}]{Koniusz2017}
+Piotr Koniusz, Fei Yan, Philippe~Henri Gosselin, and Krystian Mikolajczyk.
+  2017.
+\newblock \href {https://doi.org/10.1109/TPAMI.2016.2545667} {{Higher-Order
+  Occurrence Pooling for Bags-of-Words: Visual Concept Detection}}.
+\newblock \emph{IEEE Transactions on Pattern Analysis and Machine
+  Intelligence}, 39(2):313--326.
 
-\bibitem[{Borschinger and Johnson(2011)}]{borsch2011}
-Benjamin Borschinger and Mark Johnson. 2011.
-\newblock A particle filter algorithm for {B}ayesian wordsegmentation.
-\newblock In \emph{Proceedings of the Australasian Language Technology
-  Association Workshop 2011}, pages 10--18, Canberra, Australia.
+\bibitem[{Roberts et~al.(2018)Roberts, Engel, Raffel, Hawthorne, and
+  Eck}]{Roberts2018}
+Adam Roberts, Jesse Engel, Colin Raffel, Curtis Hawthorne, and Douglas Eck.
+  2018.
+\newblock {A hierarchical latent vector model for learning long-term structure
+  in music}.
+\newblock In \emph{35th International Conference on Machine Learning, ICML
+  2018}, volume~10.
 
-\bibitem[{Chandra et~al.(1981)Chandra, Kozen, and Stockmeyer}]{Chandra:81}
-Ashok~K. Chandra, Dexter~C. Kozen, and Larry~J. Stockmeyer. 1981.
-\newblock \href {https://doi.org/10.1145/322234.322243} {Alternation}.
-\newblock \emph{Journal of the Association for Computing Machinery},
-  28(1):114--133.
+\bibitem[{{Shaojie Bai} et~al.(2018){Shaojie Bai}, {J. Zico Kolter}, and
+  {Vladlen Koltun}}]{ShaojieBai2018}
+{Shaojie Bai}, {J. Zico Kolter}, and {Vladlen Koltun}. 2018.
+\newblock {An empirical evaluation of generic convolutional and recurrent
+  networks for sequence modeling.}
+\newblock \emph{arXiv preprint arXiv:1803.01271}.
 
-\bibitem[{for Computing~Machinery(1983)}]{ACM:83}
-Association for Computing~Machinery. 1983.
-\newblock \emph{Computing Reviews}, 24(11):503--512.
+\bibitem[{Vogl and Knees(2017)}]{Vogl2017}
+Richard Vogl and Peter Knees. 2017.
+\newblock {An Intelligent Drum Machine for Electronic Dance Music Production
+  and Performance}.
+\newblock In \emph{Proceedings of the International Conference on New
+  Interfaces for Musical Expression}.
 
-\bibitem[{Gusfield(1997)}]{Gusfield:97}
-Dan Gusfield. 1997.
-\newblock \emph{Algorithms on Strings, Trees and Sequences}.
-\newblock Cambridge University Press, Cambridge, UK.
-
-\bibitem[{Rasooli and Tetreault(2015)}]{rasooli-tetrault-2015}
-Mohammad~Sadegh Rasooli and Joel~R. Tetreault. 2015.
-\newblock \href {http://arxiv.org/abs/1503.06733} {Yara parser: {A} fast and
-  accurate dependency parser}.
-\newblock \emph{Computing Research Repository}, arXiv:1503.06733.
-\newblock Version 2.
+\bibitem[{Zheng et~al.(2016)Zheng, Yang, and Carbonell}]{Zheng2016}
+Guoqing Zheng, Yiming Yang, and Jaime Carbonell. 2016.
+\newblock \href {https://doi.org/10.1145/2939672.2939824} {{Efficient
+  shift-invariant dictionary learning}}.
+\newblock In \emph{Proceedings of the ACM SIGKDD International Conference on
+  Knowledge Discovery and Data Mining}, volume 13-17-August-2016.
 
 \end{thebibliography}
