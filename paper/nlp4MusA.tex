@@ -59,13 +59,37 @@ Music temporal structure is full of shift-invariant patterns (e.g. motifs, ostin
 
 \section{Introduction}
 
+Deep learning practitioners commonly regard recurrent architectures as the default starting point for sequence modeling tasks. The sequence modeling chapter in the canonical
+textbook on deep learning is titled “Sequence Modeling:
+Recurrent and Recursive Nets” (Goodfellow et al., 2016),
+capturing the common association of sequence modeling
+and recurrent architectures. A well-regarded recent online
+course on “Sequence Models” focuses exclusively on recurrent architectures (Ng, 2018).
 
-The dictionary learning framework, requires using a few basis elements, atoms, learned from data itself. This appraoch has led to state-of-art results in various image and video processing tasks. Sparse dictionary learning has been successfully applied to various image, video and audio processing tasks as well as to texture synthesis[16] and unsupervised clustering.[Classification and clustering via dictionary learning ..] In evaluations with the Bag-of-Words model,\citep{Vogl2017} \cite{Koniusz2017} sparse coding was found empirically to outperform other coding approaches on the object category recognition tasks.
+In addition, recent research indicates that certain convolutional architectures can reach state-of-the-art accuracy
+in audio synthesis, word-level language modeling, and machine translation (van den Oord et al., 2016; Kalchbrenner
+et al., 2016; Dauphin et al., 2017; Gehring et al., 2017a;b).This raises the question of whether these successes of convolutional sequence modeling should be explored.
 
-Sparse coding is a representation learning method which aims at finding a sparse representation of the input data (also known as sparse coding) in the form of a linear combination of basic elements as well as those basic elements themselves
+One possible way to use convolutional architectures for sequence modeling is to employ a Dictionary Learning (DL) framework. DL requires using a few basis elements, atoms, learned from data itself. This appraoch has led to state-of-art results in various image and video processing tasks. Sparse dictionary learning has been successfully applied to various image, video and audio processing tasks as well as to texture synthesis[16] and unsupervised clustering \cite{Ramrez2010ClassificationAC} In evaluations with the Bag-of-Words model,\citep{Vogl2017} \cite{Koniusz2017} sparse coding was found empirically to outperform other coding approaches on the object category recognition tasks. Furthermore, a sparse representation can be used to encode prior knowledge in the sparsity patterns. Second, they are lightweight— requiring less memory to store and allowing faster inference and easier interpretability. Sparsity provides a way to discern patterns in an informed and principled manner, resulting in smaller model size.
+ 
+%The ability to distil complex data structures such as music down to sets of dictionaries—salient features of a specific performer or music, has a multitude of applications in music. In our study, we are most interested in aiding music creation and ultimately building tools that take advantage of such ability. For instance, … [hint towards our applications]. 
+The ability to distill complex data structures such as music down to sets of dictionaries—salient features of a specific performer or music, has a multitude of applications in music, we will show a few 
 
-There are multiple benefits in finding a sparse encoding of a signal. They can be used to encode prior knowledge in the sparsity patterns. Second, they are lightweight— requiring less memory to store and allowing faster inference and easier interpretability. Sparsity provides a way to discern patterns in an informed and principled manner, resulting in smaller model size . 
-The ability to distil complex data structures such as music down to sets of dictionaries—salient features of a specific performer or music, has a multitude of applications in music. In our study, we are most interested in aiding music creation and ultimately building tools that take advantage of such ability. For instance, … [hint towards our applications]. 
+% ConvNets were subsequently
+%applied to NLP tasks such as part-of-speech tagging and
+%semantic role labelling (Collobert ; Weston, 2008; Collobert et al., 2011; dos Santos ; Zadrozny, 2014). More
+%recently, convolutional networks were applied to sentence
+%classification (Kalchbrenner et al., 2014; Kim, 2014) and
+%document classification (Zhang et al., 2015; Conneau et al.,
+%2017; Johnson ; Zhang, 2015; 2017). Particularly inspiring
+%for our work are the recent applications of convolutional
+%architectures to machine translation (Kalchbrenner et al.,
+%2016; Gehring et al., 2017a;b), audio synthesis (van den
+%Oord et al., 2016), and language modeling (Dauphin et al.,
+%2017).
+
+
+
 
 \section{Related Work}
 
@@ -77,18 +101,48 @@ And a representation $R=\left[r_{1}, \ldots, r_{K}\right], r_{i} \in \mathbb{R}^
 
 $\underset{\mathbf{D} \in \mathcal{C}, r_{i} \in \mathbb{R}^{n}, \lambda>0} {\operatorname{argmin}} \sum_{i=1}^{K}\left\|x_{i}-\mathbf{D} r_{i}\right\|_{2}^{2}+\lambda\left\|r_{i}\right\|_{0}$ \\   $\mathcal{C} \equiv\left\{\mathbf{D} \in \mathbb{R}^{d \times n}:\left\|d_{i}\right\|_{2} \leq 1 \forall i=1, \ldots, n\right\} $
 \\ \\
-However this formulation does not look for shift invariant features. 
+There are various methods to solve this problem, however this formulation does not look for shift invariant features. The dictionary components are the same size as original signal we are seeking to recustruct.
 
 \subsection{ Shift-invariant dictionary learning (SIDL)  }
 
+Shift-invariant dictionary learning (SIDL) refers to the problem of discovering a latent basis that captures local patterns at different locations of input signal, and a sparse coding for each sequence as a linear combination of these elements \cite{Zheng2016} 
+
+This has a similar formulation as eq.1 except to reconstruct we have to stride along our signal. We can rewrite \\
+$\mathbf{D} r_{i} \longrightarrow \sum_{k=1}^{K} \boldsymbol{r}_{i k} T\left(\mathbf{d}_{k}, t_{i k}\right)$
+\\
+where \\
+$T_{p}(\mathbf{d}, t) \ =\begin{cases}\mathbf{d}_{i-t} & \text { if } 1 \leq i-t \leq q \\ 0 & \text { otherwise }\end{cases}$
+
+here $t_{i k}$ corresponds first location where $d_k$ matches our signal. Therefore, $t_{i k}=0$ indicating that $\mathbf{d}_{k}$ is aligned to the beginning of $\mathbf{x}_{i}$ and that $t_{i k}=p-q$ indicating the largest shift $\mathbf{d}_{k}$ can be aligned to $\mathbf{x}_{i}$ without running beyond
+
+
 In previous works, various shift-invariant dictionary learning (SIDL) methods have been employed to discover local patterns that are embedded across a longer time series in sequential data such as audio signals. While \cite{Grosse2007} employs shift-
-invariant sparse coding with a convolutional optimization and gradient descent method for an audio classification task, \cite{Zheng2016} demonstrates an efficient algorithm with the ability to combine shift-invariant patterns in a sparse coding of the original data for audio reconstruction and classification tasks. Such unsupervised learning methods have shown to be powerful in discovering shift-invariant patterns and a handful of studies have implemented SIDL for the purpose of music. Although music transcription and classification tasks have seen a strong usage of sparse dictionary learning in the past [Shift-Invariant Sparse Coding for Audio Classification, NMF based Dictionary Learning for Automatic Transcription of Polyphonic Piano Music, Sparse and Shift-Invariant Representations of Music, Music Genre Classification using On-line Dictionary Learning, Learning Sparse Dictionaries for Music and Speech Classification, Context-Dependent Piano Music Transcription With Convolutional Sparse Coding], we have yet to see a study that harnesses the advantages of sparse representation for the purpose of music creation. Instead, the popular methods for discovering music relations and achieving music generation have been a transformer with some sort of attention mechanism or the recurrent architectures. [Discovering Music Relations with Sequential Attention], for instance, uses an attention module that is tailored to the discovery of sequence level relations in music, while studies like \cite{Roberts2018} uses the recurrent variational autoencoder and a hierarchical decoder in order to model long-term musical structures. 
+invariant sparse coding with a convolutional optimization and gradient descent method for an audio classification task, \cite{Zheng2016} demonstrates an efficient algorithm with the ability to combine shift-invariant patterns in a sparse coding of the original data for audio reconstruction and classification tasks. Such unsupervised learning methods have shown to be powerful in discovering shift-invariant patterns and a handful of studies have implemented SIDL for the purpose of music. Although music transcription and classification tasks have seen a strong usage of sparse dictionary learning in the past \cite{Grosse2007} \cite{Costantini2013}, \cite{Blumensath2006}, \cite{SrinivasM2014}, \cite{Srinivas2014}, \cite{Cogliati2016}, we have yet to see a study that harnesses the advantages of sparse representation for the purpose of music creation. Instead, the popular methods for discovering music relations and achieving music generation have been a transformer with some sort of attention mechanism or the recurrent architectures. \cite{JiangJunyan2020} for instance, uses an attention module that is tailored to the discovery of sequence level relations in music, while studies like \cite{Roberts2018} uses the recurrent variational autoencoder and a hierarchical decoder in order to model long-term musical structures. 
 
 
 
 
 \subsection{Temporal Convolutional Networks (TCN) }
- Some of the most notable benefits include longer effective memory and low memory requirement when training. We explore these benefits for the purpose of music, which inherently requires a longer history due to musical temporal structure. Moreover, the low memory requirement of the convolutional architecture combined with a sparse representation in dictionary learning presents a strong potential for lighter and faster modeling with a high prospect of being applied to a real-time and on-line dictionary learning in the future. In this paper, we propose SIDL using TCN WTA-Autoencoders for discovering music relations—salient features of a specific performer or music, and illustrate potential applications in music analysis and creation. Some Benifits of TCN over RNNs are Parallelism, flexible receptive field size, and low memory requirement for training
+The distinguishing characteristics of TCNs are: 1)
+the convolutions in the architecture are causal, meaning that
+there is no information “leakage” from future to past; 2) the
+architecture can take a sequence of any length and map it to
+an output sequence of the same length, just as with an RNN.
+Beyond this, we emphasize how to build very long effective
+history sizes (i.e., the ability for the networks to look very
+far into the past to make a prediction) using a combination
+of very deep networks (augmented with residual layers) and
+dilated convolutions.
+Our architecture is informed by recent convolutional architectures for sequential data (van den Oord et al., 2016;
+Kalchbrenner et al., 2016; Dauphin et al., 2017; Gehring
+et al., 2017a;b), but is distinct from all of them and was
+designed from first principles to combine simplicity, autoregressive prediction, and very long memory. For example,
+the TCN is much simpler than WaveNet (van den Oord et al.,
+2016) (no skip connections across layers, conditioning, context stacking, or gated activations).
+Compared to the language modeling architecture of Dauphin
+et al. (2017), TCNs do not use gating mechanisms and have
+much longer memory
+
 
 
 \subsection{SIDL by TCN K-WTA Autoencoders}
@@ -188,8 +242,6 @@ It is also possible to use this average kernel usage for each composer and make 
 
 If we have a specific musical structure we would like to follow. For example, 4/4 120bpm. We can train inject prior information into our 1D convolutions. For example, we can make each kernel the length of 1/4 beat. This allows for better dictionary learning since repetition is expected to happen at this time steps. We can stitch together musical sections, to create bars of music. and desing a specfic structure 
 
-
-
 %% NOTE: NLP4MusA desn't need DOI.
 % BEGIN: remove
 % \textbf{Digital Object Identifiers}:  As part of our work to make ACL
@@ -226,18 +278,7 @@ If we have a specific musical structure we would like to follow. For example, 4/
 
 
 \subsection{Genrating Piano Music }
-
-Type the abstract at the beginning of the first
-column. The width of the abstract text should be smaller than the
-width of the columns for the text in the body of the paper by about
-0.6 cm on each side. Center the word \textbf{Abstract} in a 12 point bold
-font above the body of the abstract. The abstract should be a concise
-summary of the general thesis and conclusions of the paper. It should
-be no longer than 200 words. The abstract text should be in 10 point font.
-
-
-
-
+There are multiple benefits to this sequence learning methodology. The first is such as simplicity and felxibilty, the TCN autoencocoder is a simple to implemnt arquitecture and requires any abitrary size combinations of multivariate musical signals.
 
 \section{Discussion}
 \label{ssec:discussion}
@@ -296,7 +337,7 @@ Include your own bib file like this:
 \verb|\bibliography{nlp4MusA}| 
 
 where \verb|nlp4MusA| corresponds to a nlp4MusA.bib file.
-\bibliography{SIDL-citations}
+\bibliography{SIDL-citations1}
 \bibliographystyle{nlp4MusA_natbib}
 
 

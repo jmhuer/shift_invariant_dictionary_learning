@@ -1,5 +1,27 @@
-\begin{thebibliography}{8}
+\begin{thebibliography}{15}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[{Blumensath and Davies(2006)}]{Blumensath2006}
+Thomas Blumensath and Mike Davies. 2006.
+\newblock \href {https://doi.org/10.1109/TSA.2005.860346} {{Sparse and
+  shift-invariant representations of music}}.
+\newblock In \emph{IEEE Transactions on Audio, Speech and Language Processing},
+  volume~14.
+
+\bibitem[{Cogliati et~al.(2016)Cogliati, Duan, and Wohlberg}]{Cogliati2016}
+Andrea Cogliati, Zhiyao Duan, and Brendt Wohlberg. 2016.
+\newblock \href {https://doi.org/10.1109/TASLP.2016.2598305}
+  {{Context-Dependent Piano Music Transcription with Convolutional Sparse
+  Coding}}.
+\newblock \emph{IEEE/ACM Transactions on Audio Speech and Language Processing},
+  24(12).
+
+\bibitem[{Costantini et~al.(2013)Costantini, Todisco, and
+  Perfetti}]{Costantini2013}
+Giovanni Costantini, Massimiliano Todisco, and Renzo Perfetti. 2013.
+\newblock {NMF based dictionary learning for automatic transcription of
+  polyphonic piano music}.
+\newblock \emph{WSEAS Transactions on Signal Processing}, 9(3).
 
 \bibitem[{Gillick et~al.(2019)Gillick, Roberts, Engel, Eck, and
   Bamman}]{groove2019}
@@ -21,6 +43,13 @@ Curtis Hawthorne, Andriy Stasyuk, Adam Roberts, Ian Simon, Cheng-Zhi~Anna
   factorized piano music modeling and generation with the {MAESTRO} dataset}.
 \newblock In \emph{International Conference on Learning Representations}.
 
+\bibitem[{{Jiang Junyan} et~al.(2020){Jiang Junyan}, {Gus Xia}, and {Taylor
+  Berg-Kirkpatrick}}]{JiangJunyan2020}
+{Jiang Junyan}, {Gus Xia}, and {Taylor Berg-Kirkpatrick}. 2020.
+\newblock {Discovering Music Relations with Sequential Attention}.
+\newblock In \emph{Proceedings of the 1st workshop on nlp for music and audio
+  (nlp4musa)}, pages 1--5.
+
 \bibitem[{Koniusz et~al.(2017)Koniusz, Yan, Gosselin, and
   Mikolajczyk}]{Koniusz2017}
 Piotr Koniusz, Fei Yan, Philippe~Henri Gosselin, and Krystian Mikolajczyk.
@@ -29,6 +58,14 @@ Piotr Koniusz, Fei Yan, Philippe~Henri Gosselin, and Krystian Mikolajczyk.
   Occurrence Pooling for Bags-of-Words: Visual Concept Detection}}.
 \newblock \emph{IEEE Transactions on Pattern Analysis and Machine
   Intelligence}, 39(2):313--326.
+
+\bibitem[{Ram{\'\i}rez et~al.(2010)Ram{\'\i}rez, Sprechmann, and
+  Sapiro}]{Ramrez2010ClassificationAC}
+I.~Ram{\'\i}rez, P.~Sprechmann, and G.~Sapiro. 2010.
+\newblock Classification and clustering via dictionary learning with structured
+  incoherence and shared features.
+\newblock \emph{2010 IEEE Computer Society Conference on Computer Vision and
+  Pattern Recognition}, pages 3501--3508.
 
 \bibitem[{Roberts et~al.(2018)Roberts, Engel, Raffel, Hawthorne, and
   Eck}]{Roberts2018}
@@ -45,6 +82,21 @@ Adam Roberts, Jesse Engel, Colin Raffel, Curtis Hawthorne, and Douglas Eck.
 \newblock {An empirical evaluation of generic convolutional and recurrent
   networks for sequence modeling.}
 \newblock \emph{arXiv preprint arXiv:1803.01271}.
+
+\bibitem[{Srinivas et~al.(2014)Srinivas, Roy, and {Krishna
+  Mohan}}]{Srinivas2014}
+M.~Srinivas, Debaditya Roy, and C.~{Krishna Mohan}. 2014.
+\newblock \href {https://doi.org/10.1109/ICDSP.2014.6900749} {{Learning sparse
+  dictionaries for music and speech classification}}.
+\newblock In \emph{International Conference on Digital Signal Processing, DSP},
+  volume 2014-January.
+
+\bibitem[{{Srinivas M} et~al.(2014){Srinivas M}, {Roy D}, and {Mohan
+  CK}}]{SrinivasM2014}
+{Srinivas M}, {Roy D}, and {Mohan CK}. 2014.
+\newblock {Music genre classification using on-line dictionary learning.}
+\newblock In \emph{International Joint Conference on Neural Networks (IJCNN)},
+  pages 1937--1941.
 
 \bibitem[{Vogl and Knees(2017)}]{Vogl2017}
 Richard Vogl and Peter Knees. 2017.

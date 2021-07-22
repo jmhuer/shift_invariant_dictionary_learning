@@ -6,46 +6,48 @@ Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
 Reallocated global_strs (elt_size=20001) to 20 items from 10.
 Reallocated glb_str_end (elt_size=4) to 20 items from 10.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
-Database file #1: SIDL-citations.bib
+Database file #1: SIDL-citations1.bib
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
-You've used 8 entries,
+Warning--can't use both volume and number fields in Blumensath2006
+You've used 15 entries,
             3571 wiz_defined-function locations,
-            742 strings with 7485 characters,
-and the built_in function-call counts, 5944 in all, are:
-= -- 458
-> -- 357
-< -- 3
-+ -- 113
-- -- 105
-* -- 418
-:= -- 922
-add.period$ -- 32
-call.type$ -- 8
-change.case$ -- 87
-chr.to.int$ -- 8
-cite$ -- 8
-duplicate$ -- 412
-empty$ -- 406
-format.name$ -- 131
-if$ -- 1257
+            793 strings with 9112 characters,
+and the built_in function-call counts, 11023 in all, are:
+= -- 905
+> -- 575
+< -- 9
++ -- 180
+- -- 165
+* -- 750
+:= -- 1652
+add.period$ -- 60
+call.type$ -- 15
+change.case$ -- 150
+chr.to.int$ -- 15
+cite$ -- 16
+duplicate$ -- 774
+empty$ -- 782
+format.name$ -- 214
+if$ -- 2387
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 93
-newline$ -- 44
-num.names$ -- 32
-pop$ -- 233
+missing$ -- 165
+newline$ -- 79
+num.names$ -- 60
+pop$ -- 405
 preamble$ -- 1
-purify$ -- 67
+purify$ -- 115
 quote$ -- 0
-skip$ -- 239
+skip$ -- 494
 stack$ -- 0
-substring$ -- 113
-swap$ -- 193
-text.length$ -- 2
+substring$ -- 282
+swap$ -- 380
+text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 72
-warning$ -- 0
-while$ -- 26
+type$ -- 135
+warning$ -- 1
+while$ -- 55
 width$ -- 0
-write$ -- 102
+write$ -- 193
+(There was 1 warning)
