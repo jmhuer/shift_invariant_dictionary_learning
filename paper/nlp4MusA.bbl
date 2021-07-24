@@ -1,4 +1,4 @@
-\begin{thebibliography}{18}
+\begin{thebibliography}{19}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[{Blumensath and Davies(2006)}]{Blumensath2006}
@@ -85,6 +85,13 @@ Aaron van~den Oord, Sander Dieleman, Heiga Zen, Karen Simonyan, Oriol Vinyals,
   Alex Graves, Nal Kalchbrenner, Andrew Senior, and Koray Kavukcuoglu. 2016.
 \newblock \href {http://arxiv.org/abs/1609.03499} {Wavenet: A generative model
   for raw audio}.
+
+\bibitem[{Oore et~al.(2018)Oore, Simon, Dieleman, Eck, and
+  Simonyan}]{DBLP:journals/corr/abs-1808-03715}
+Sageev Oore, Ian Simon, Sander Dieleman, Douglas Eck, and Karen Simonyan. 2018.
+\newblock \href {http://arxiv.org/abs/1808.03715} {This time with feeling:
+  Learning expressive musical performance}.
+\newblock \emph{CoRR}, abs/1808.03715.
 
 \bibitem[{Peyr{\'e}(2009)}]{Peyre2009}
 Gabriel Peyr{\'e}. 2009.

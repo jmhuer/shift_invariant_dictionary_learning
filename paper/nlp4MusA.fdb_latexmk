@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex nlp4MusA"] 1627102102 "nlp4MusA.aux" "nlp4MusA.bbl" "nlp4MusA" 1627103432
+["bibtex nlp4MusA"] 1627103974 "nlp4MusA.aux" "nlp4MusA.bbl" "nlp4MusA" 1627103975
   "./nlp4MusA_natbib.bst" 1592458836 47607 e96542695ea41304787e3270e6f0eccf ""
-  "SIDL-citations3.bib" 1627100699 41088 72361ff6bba8c93195b701f72182cfd7 ""
-  "nlp4MusA.aux" 1627103431 4499 c91f52f35e1acdc75a06eaac84df8a69 "pdflatex"
+  "SIDL-citations3.bib" 1627103908 41780 af1362e175b335739d5f0455c8a9272d ""
+  "nlp4MusA.aux" 1627103975 4681 cf9b04df392e2fc21acd928e421aa6b1 "pdflatex"
   (generated)
-  "nlp4MusA.blg"
   "nlp4MusA.bbl"
-["pdflatex"] 1627103431 "nlp4MusA.tex" "nlp4MusA.pdf" "nlp4MusA" 1627103432
+  "nlp4MusA.blg"
+["pdflatex"] 1627103974 "nlp4MusA.tex" "nlp4MusA.pdf" "nlp4MusA" 1627103975
   "/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2019/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/local/texlive/2019/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm" 1136768653 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -125,13 +125,13 @@
   "images/maestro.png" 1626891280 101841 7e1a8891a810cb9a181a3c52882dcaed ""
   "images/newplot.png" 1626841097 74156 a2f6b39318298a87d278196e1d6fb339 ""
   "images/tcn.png" 1626888415 30627 4a3be45b7b57e308da3f8228458b646c ""
-  "nlp4MusA.aux" 1627103431 4499 c91f52f35e1acdc75a06eaac84df8a69 "pdflatex"
-  "nlp4MusA.bbl" 1627102103 6303 70e0229a7961731cc190dc54f28642d0 "bibtex nlp4MusA"
-  "nlp4MusA.out" 1627103431 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "nlp4MusA.aux" 1627103975 4681 cf9b04df392e2fc21acd928e421aa6b1 "pdflatex"
+  "nlp4MusA.bbl" 1627103974 6649 227f804ae3990590121a1a33bcb71217 "bibtex nlp4MusA"
+  "nlp4MusA.out" 1627103974 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   "nlp4MusA.sty" 1625511337 22064 cb9ae4122fcfdd7a3d8ca040bdcb478c ""
-  "nlp4MusA.tex" 1627103431 23747 e2523bb5a7084816a3b0683e490b722b ""
+  "nlp4MusA.tex" 1627103973 23807 3081985f4b7fded68e5512c863d310d0 ""
   (generated)
+  "nlp4MusA.log"
   "nlp4MusA.out"
   "nlp4MusA.pdf"
   "nlp4MusA.aux"
-  "nlp4MusA.log"

@@ -159,9 +159,9 @@ We use two distinct datasets: MAESTRO  \cite{hawthorne2018enabling}, and  grove 
     \centering
     \begin{tabular}{p{0.15\linewidth} | p{0.15\linewidth} | p{0.1\linewidth}  | p{0.45\linewidth} }
       Dataset  & Size  & Instrument &  MIDI Representation\\ \hline
-      Maestro  & 1020 (Hrs)   & Piano &  One-hot encoding over 388 different MIDI events. Every datapoint here has an arbitrary length \\
+      Maestro  & 1020 (Hrs)   & Piano &  One-hot encoding over 388 different MIDI events. Every datapoint here has an arbitrary length \cite{DBLP:journals/corr/abs-1808-03715} \\
         \hline
-        Groove & 3.6 (Hrs)  & Drum &  T timesteps (one per 16th note) and 27 MIDI events. We use fixed length 64 time step sections\\
+        Groove & 3.6 (Hrs)  & Drum &  T timesteps (one per 16th note) and 27 MIDI events. We use fixed length 64 time step sections \cite{groove2019} \\
     \end{tabular}
     \caption{Datasets used to experiment with fully convolutional temporal autoencoder model. All datasets used are MIDI format }
     \label{tab:my_label}
