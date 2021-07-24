@@ -52,19 +52,18 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-Music temporal structure is full of shift-invariant patterns (e.g. motifs, ostinatos, loops, samples, etc.).  We propose using a using a Fully Convolutional Temporal Autoencoder (FCTA) with a k-Winner Takes All (k-WTA) activation function to find a shift-invariant dictionary to represent symbolic, multivariate, musical signals. We train our model to represent fixed drum tracks and variable length piano music. We show few applications of this sparse representation such as de-noising musical ideas, unsupervised stylistic segmentation, and music generation. To assist related work, we have made interactive code available along with the trained models 
-
-
+Music temporal structure is full of shift-invariant patterns (e.g. motifs, ostinatos, loops, etc.). We propose using a Fully Convolutional Temporal Autoencoder (FCTA) with a k-Winner Takes All (k-WTA) activation function to find a shift-invariant dictionary to represent symbolic, multivariate, musical signals. We train our model to represent fixed drum tracks and variable length piano music. Applications of this sparse representation such as de-noising musical ideas, unsupervised stylistic segmentation, and music generation are discussed. To assist related work, we have made interactive code available along with the trained models. 
 
 \end{abstract}
 
 \section{Introduction}
 
-The dictionary learning framework, aims at finding a sparse representation of the input data (sparse coding) in the form of a linear combination of basic elements we call atoms. There are multiple benefits in obtaining a sparse encoding of a signal. To name a few, they are lightweight— requiring less memory to store and allowing faster inference and easier interpretability and they can encode prior knowledge in the sparsity patterns. In addition, sparsity provides a way to discern patterns in an informed and principled manner . 
+The dictionary learning framework aims at finding a sparse representation of the input data (sparse coding) in the form of a linear combination of basic elements called atoms. In doing so, sparse coding enables (1) faster inference and easier interpretability thanks to its lightweight stored memory, (2) encoding of prior knowledge in the sparsity patterns, and (3) discerning patterns in an informed and principled manner.  
 
- Sparse dictionary learning has led to state-of-art results in various image and video processing tasks as well as to texture synthesis \cite{Peyre2009} and unsupervised clustering \cite{Ramrez2010ClassificationAC} . In evaluations with the Bag-of-Words model \cite{7439823}, sparse coding was found empirically to outperform other coding approaches on the object category recognition tasks.  
- 
-The ability to dis til complex data structures such as music down to sets of dictionaries—salient features of a specific performer or music, has a multitude of applictions in music.  Music transcription and classification tasks have seen a strong usage of sparse dictionary learning in the past \cite{Grosse2007} \cite{Costantini2013}, \cite{Blumensath2006}, \cite{SrinivasM2014}, \cite{Srinivas2014}, \cite{Cogliati2016}. Nonetheless, we have yet to see a study that harnesses the advantages of sparse representation for the purpose of music creation. Instead, the popular methods for discovering music relations and achieving music generation have been a transformer with some sort of attention mechanism or the recurrent architectures. \cite{JiangJunyan2020} for instance, uses an attention module that is tailored to the discovery of sequence level relations in music, while studies like \cite{Roberts2018} uses the recurrent variational autoencoder and a hierarchical decoder in order to model long-term musical structures. In our study we explore applications of sparse representation such as de-noising musical ideas, unsupervised stylistic segmentation, and music generation.
+ Sparse dictionary learning has led to state-of-art results in various tasks including image and video processing, texture synthesis \cite{Peyre2009}, and unsupervised clustering \cite{Ramrez2010ClassificationAC}. In evaluations with the Bag-of-Words model \cite{7439823}, sparse coding was found empirically to outperform other coding approaches on the object category recognition tasks.  
+
+When applied to music, the ability to distil complex data structures down to sets of dictionaries—salient features of a specific performer or music, has a multitude of applications. Music transcription and classification tasks have seen a strong usage of sparse dictionary learning in the past \cite{Grosse2007} \cite{Costantini2013}, \cite{Blumensath2006}, \cite{SrinivasM2014}, \cite{Srinivas2014}, \cite{Cogliati2016}. Nonetheless, we have yet to see a study that harnesses the advantages of sparse representation for the purpose of music creation. Instead, the popular methods for discovering music relations and achieving music generation have been a transformer with some sort of attention mechanism or the recurrent architectures. \cite{JiangJunyan2020} for instance, uses an attention module that is tailored to the discovery of sequence level relations in music, while studies like \cite{Roberts2018} uses the recurrent variational autoencoder and a hierarchical decoder in order to model long-term musical structures. In our study, we explore applications of sparse representation such as de-noising musical ideas, unsupervised stylistic segmentation, and music generation.
+
  
 
 % ConvNets were subsequently
@@ -81,7 +80,7 @@ The ability to dis til complex data structures such as music down to sets of dic
 %2017).
 
 
-\section{Related Work}
+\section{Preliminaries}
 
 
 \subsection{ Dictionary learning  }
@@ -91,19 +90,19 @@ And a representation $R=\left[r_{1}, \ldots, r_{K}\right], r_{i} \in \mathbb{R}^
 
 $\underset{\mathbf{D} \in \mathcal{C}, r_{i} \in \mathbb{R}^{n}, \lambda>0} {\operatorname{argmin}} \sum_{i=1}^{K}\left\|x_{i}-\mathbf{D} r_{i}\right\|_{2}^{2}+\lambda\left\|r_{i}\right\|_{0}$ \\   $\mathcal{C} \equiv\left\{\mathbf{D} \in \mathbb{R}^{d \times n}:\left\|d_{i}\right\|_{2} \leq 1 \forall i=1, \ldots, n\right\} $
 \\ \\
-There are various methods to solve this problem, however this formulation does not look for shift invariant features. The dictionary components are the same size as original signal we are seeking to recustruct.
+There are various methods to solve this problem, however this formulation does not look for shift- invariant features. The dictionary components are the same size as the original signal we are seeking to reconstruct.
 
 \subsection{ Shift-invariant dictionary learning (SIDL)  }
 
 Shift-invariant dictionary learning (SIDL) refers to the problem of discovering a latent basis that captures local patterns at different locations of input signal, and a sparse coding for each sequence as a linear combination of these elements \cite{Zheng2016} 
 
-This has a similar formulation as eq.1 except to reconstruct we have to stride along our signal. We can rewrite \\
+This has a similar formulation as eq.1 except that in order to reconstruct the signal, we need to stride along the input signal:  \\
 $\mathbf{D} r_{i} \longrightarrow \sum_{k=1}^{K} \boldsymbol{r}_{i k} T\left(\mathbf{d}_{k}, t_{i k}\right)$
 \\
 where \\
 $T_{p}(\mathbf{d}, t) \ =\begin{cases}\mathbf{d}_{i-t} & \text { if } 1 \leq i-t \leq q \\ 0 & \text { otherwise }\end{cases}$
 
-here $t_{i k}$ corresponds first location where $d_k$ matches our signal. Therefore, $t_{i k}=0$ indicating that $\mathbf{d}_{k}$ is aligned to the beginning of $\mathbf{x}_{i}$ and that $t_{i k}=p-q$ indicating the largest shift $\mathbf{d}_{k}$ can be aligned to $\mathbf{x}_{i}$ without running beyond
+here $t_{i k}$ corresponds to the first location where $d_k$ matches our signal. Therefore, $t_{i k}=0$ indicating that $\mathbf{d}_{k}$ is aligned to the beginning of $\mathbf{x}_{i}$ and that $t_{i k}=p-q$ indicating the largest shift $\mathbf{d}_{k}$ can be aligned to $\mathbf{x}_{i}$ without running beyond.
 
 
 In previous works, various shift-invariant dictionary learning (SIDL) methods have been employed to discover local patterns that are embedded across a longer time series in sequential data such as audio signals. While \cite{Grosse2007} employs shift-
@@ -116,29 +115,27 @@ invariant sparse coding with a convolutional optimization and gradient descent m
 
 Recent results suggest that TCNs convincingly outperform
 baseline recurrent architectures across a broad range of sequence modeling tasks. The characteristics of TCNs are: the convolutions in the architecture have no information “leakage” from future to past; and the architecture can take a sequence of any length and map it to
-an output sequence of the same length, similar to an RNN.
+an output sequence of the same length, similar to an RNN. In summary: TCN = 1D FCN + causal convolutions.
 
-To put it simply: TCN = 1D FCN + causal convolutions.
-
-This architecture is informed by recent convolutional architectures for sequential data \cite{oord2016wavenet},
-\cite{kalchbrenner2017neural} ; \cite{DBLP:journals/corr/DauphinFAG16}; \cite{Zheng2016}, TCN have several advantages: they are simpler than WaveNet \cite{oord2016wavenet} since there are no skip connections across layers, conditioning, context stacking, or gated activations.
+This architecture is designed according to recent convolutional architectures for sequential data \cite{oord2016wavenet},
+\cite{kalchbrenner2017neural} ; \cite{DBLP:journals/corr/DauphinFAG16}; \cite{Zheng2016}. TCN have several advantages: they have no skip connections across layers, conditioning, context stacking, or gated activations.
 
 
 \subsection{SIDL by TCN K-WTA Autoencoders}
-To learn the shift invariant dictionaries, we use a convolutional k-winner-take-all autoencoder \cite{DBLP:journals/corr/MakhzaniF14}. This is a standard convolutional autoencoder except after training the encoder, the single largest hidden activity of each feature map is kept and the rest (as well as their derivatives) are set to zero. Next, the decoder reconstructs the output from the sparse feature maps. This results in a sparse representation where the sparsity level is the number of non-zero feature maps. \emph{If a shallow decoder (1 layer) is used, the kernel weights of the decoder are the atoms of the dictionary used to reconstruct the signal}. 
+To learn the shift invariant dictionaries, we use a Fully Convolutional Temporal Autoencoder (FCTA) with a k-Winner Takes All (k-WTA) \cite{DBLP:journals/corr/MakhzaniF14}. This is a standard convolutional autoencoder except after training the encoder, the single largest hidden activity of each feature map is kept and the rest (as well as their derivatives) are set to zero. Next, the decoder reconstructs the output from the sparse feature maps. This results in a sparse representation where the sparsity level is the number of non-zero feature maps. \emph{If a shallow decoder (1 layer) is used, the kernel weights of the decoder are the atoms of the dictionary used to reconstruct the signal}. 
 
-In theory, all we need to learn a dictionary is a Ecoder-Decoder 1D-Conv layers to generate a sprase representation. However, if our signal is dense, learning can improve if we add a TCN Layer to extract temporal features. This TNC can have variable depth depending on the task.
+In theory, all we need to learn a dictionary is a 1D-Conv Encoder-Decoder layer. However, if the input signal is dense, learning can improve by adding a TCN Layer to extract features. This TNC can have variable depth depending on the task.
 
 \begin{figure}[ht]
   \includegraphics[width=\linewidth]{/Users/juanhuerta/personal_projects/code/shift_invariant_dictionary_learning/paper/images/tcn.png}
-  \caption{After training the model we can use it to encode datapoints of arbitrary length unsupervised stylistic segmentation. We use PCA on the average sparse code for each piece. We project into 2 dimensional sparse to visualize }
+  \caption{Diagram depicting our Fully Convolutional Temporal Autoencoder (FCTA) architecture. Note the TCN Block can have arbitrary depth, and is not required to construct a dictionary but useful to extract features}
   \label{fig:boat1}
 \end{figure}
 
 \begin{figure*}[ht]
   \includegraphics[width=\linewidth]{/Users/juanhuerta/personal_projects/code/shift_invariant_dictionary_learning/paper/images/newplot.png}
-  \caption{After training the model we can use it to encode datapoints of arbitrary length unsupervised stylistic segmentation. We use PCA on the average sparse code for each piece. We project into 2 dimensional sparse to visualize }
-  \label{fig:boat1}
+  \caption{After training the model we can use it to encode data points of arbitrary length unsupervised stylistic segmentation. We use PCA on the average sparse code for each piece. We project into 2 dimensional sparse to visualize }
+    \label{fig:boat1}
 \end{figure*}
 
 
@@ -147,36 +144,36 @@ In theory, all we need to learn a dictionary is a Ecoder-Decoder 1D-Conv layers 
 \section{Experiments}
 \label{ssec:experiments}
 
-We show a few applications of our TCN k-WTA model, De-noising musical ideas; Unsupervised stylistic segmentation; Music generation. We do this for two distinct datasets with different MIDI encodings.
+We show a few applications of our TCN k-WTA model, de-noising musical ideas, unsupervised stylistic segmentation, and music generation. We do this for two distinct datasets with different MIDI encodings.
 
 
 \subsection{Datasets}
 \label{ssec:experiments}
 
-We use two distinct datasets: MAESTRO  \cite{hawthorne2018enabling}, and  grove Groove  \cite{groove2019} . See table 2 for more details on the datasets used. We also use distinct MIDI representations for each dataset. 
+We use two distinct datasets: MAESTRO  \cite{hawthorne2018enabling}, and  grove Groove  \cite{groove2019} . See Table 1 for more details on the datasets used. We also use distinct MIDI representations for each dataset. 
 
 \begin{table*}[ht]
     \centering
     \begin{tabular}{p{0.15\linewidth} | p{0.15\linewidth} | p{0.1\linewidth}  | p{0.45\linewidth} }
       Dataset  & Size  & Instrument &  MIDI Representation\\ \hline
-      Maestro  & 1020 (Hrs)   & Piano &  One-hot encoding over 388 different MIDI events. Every datapoint here has an arbitrary length \cite{DBLP:journals/corr/abs-1808-03715} \\
+      Maestro  & 1020 (Hrs)   & Piano &  One-hot encoding over 388 different MIDI events. Music has an arbitrary length \cite{DBLP:journals/corr/abs-1808-03715} \\
         \hline
         Groove & 3.6 (Hrs)  & Drum &  T timesteps (one per 16th note) and 27 MIDI events. We use fixed length 64 time step sections \cite{groove2019} \\
     \end{tabular}
-    \caption{Datasets used to experiment with fully convolutional temporal autoencoder model. All datasets used are MIDI format }
+    \caption{Details for the datasets used to train the Fully Convolutional Temporal Autoencoder (FCTA) }
     \label{tab:my_label}
 \end{table*}
 
 \subsection{Model Implementation}
-Both models were implemented in Pytorch, with MSE loss on reconstruction, and AdamW optimizer. Our model implementation differs slightly for the different datasets used. Below are the implementation details
+Both models were implemented in Pytorch, with MSE loss on reconstruction, and AdamW optimizer. Our model implementation differs slightly for the two datasets. 
  \\
-\textbf{Maestro Model} : We use an architecture as in figure 1. The TCN layer uses a [1,8,16,24] feature map, and we use 1000 dictionary size. We use a decaying k-WTA since this empirically improved our model accuracy. We begin with $k=95$ and decay to $k=75$ over $60$ Epochs. The Convolutions are non-overlapping strides--meaning every kernel-length time step is only made up one column in our sparse code--this helps reduce memory requirements and help us find repeating sections over a fixed kernel length. We use use a batch size of 1, this batch size allows us to train on variable length music since our autoencoder is fully convolutional--however our sparse representation will also be variable length. \\
-\textbf{Groove Model}  : For the Groove, drum dataset our design is We use an architecture as in figure 1 but without TCN layer, and we use 100 dictionary size. We use a decaying k-WTA since this empirically improved our model accuracy. We begin with $k=95$ and decay to $k=75$ over $60$ The Convolutions are similarly also non-overlapping strides. . We do not batch, we train on the full dataset. We  preprocess the dataset to match 120 bpm, 4/4 time signature and only train on 1 bar of music.  For this dataset we have good understanding of repeating time intervals and structure, unlike maestro dataset. 
+\textbf{Maestro Model} : The architecture is illustrated in Figure 1. The TCN layer uses a [1,8,16,24] feature map, and we use a 1000 dictionary size along with a decaying k-WTA\footnote{In the original paper k-WTA is applied after training the encoder. We use the k-WTA activation during training for lower GPU memory requirements, and the decaying k showed to achieve a higher accuracy}. We begin with $k=95$ and decay to $k=75$ over $60$ epochs. The convolutions are non-overlapping strides, meaning every kernel-length time step is only made up of one column in our sparse code. This helps to reduce memory requirements and find repeating sections over a fixed kernel length. We use a batch size of 1 which allows us to train on variable length music since our autoencoder is fully convolutional. However our sparse representation will also be variable length. \\
+\textbf{Groove Model}  : The architecture is illustrated in Figure 1, however since the Groove drum representation is not very dense, we do not use a TCN layer. We use a 100 dictionary size along with a decaying k-WTA with $k=10$ and decay to $k=1$ over $1000$ epochs. The Convolutions are  also non-overlapping strides. We train on the full dataset with no batching. The dataset is processed to match 120 bpm, 4/4 time signature and only train on 1 bar of music.  For this dataset we have good understanding of repeating time intervals and structure, unlike Maestro the dataset. 
 
 
 \begin{figure*}[ht]
   \includegraphics[width=\linewidth]{/Users/juanhuerta/personal_projects/code/shift_invariant_dictionary_learning/paper/images/maestro.png}
-  \caption{After training the model we can use it to encode datapoints of arbitrary length unsupervised stylistic segmentation. We use PCA on the average sparse code for each piece. We project into 2 dimensional sparse to visualize }
+  \caption{After training the model we can use it to encode data points of arbitrary length unsupervised stylistic segmentation. We use PCA on the average sparse code for each piece. We project into 2 dimensional sparse for the visualization. }
   \label{fig:boat1}
 \end{figure*}
 
@@ -186,16 +183,16 @@ Both models were implemented in Pytorch, with MSE loss on reconstruction, and Ad
 
  \textbf{De-noising musical ideas: } Dictionary learning has successfully been shown to de-noise image, videos. By simply reconstructing our musical signal. 
 \\
- \textbf{Keep N Active Atoms: } Another application of having a sprase code, is the ability to recognize the most used words in the dictionary. Given a sparse code we can limit a piece to only be made up of the top N atoms. Some example applications of keeping top N atoms are for example, low dimensionality feature extraction for machine learning task; music reduction--reduction wherein the complexity of the arrangement is reduced to a simpler transcription and parts. 
+ \textbf{Keep N Active Atoms: } The advantage of having a sparse code is the ability to recognize the most used atoms in the dictionary. Some applications of this ability include low dimensionality feature extraction for machine learning tasks; music reduction--reduction wherein the complexity of the arrangement is reduced to a simpler transcription and parts. 
  %And Music Segmentation (Discretization) wherein various musical ideas used in a piece of music are isolated from the piece itself. Such segmented ideas could be used in analysis or creatively repurposed to generate new music.
 
 \subsection{Unsupervised Stylistic Segmentation }
 If we train with a dataset that includes multiple composers we should expect to find that different composers utilize different shift invariant patters. To visualize kernel usage we average out the rows of our sparse code. This should provide us with the average dictionary word value. If we do PCA on the average dictionary vector and reduce dimensionality to 2D. We obtain the plot in Figure 2
 
 \subsection{Generating New Music}
- \textbf{Interpolating Sparse Code } We use encode existing music and interpolate between sparse code to generate new music. In order to obtain good results we measure cos similarity between sparse code to find candidates to interpolate. For drum generation all of the sections are fixed length; for piano we have variable length sprarse code. To interpolate variable length code we can fix the input size, or interpolate specific sections of the sprarse code. The results are significantly better for drum generation than piano generation. Although the piano generation does seem to follow high level musical features, such as key time, and scale.
+ \textbf{Interpolating Sparse Code } We use encode existing music and interpolate between sparse code to generate new music. In order to obtain good results we measure cos similarity between sparse code to find candidates to interpolate. For drum generation, all of the sections are fixed length whereas for piano generation a variable length sprarse code is used. To interpolate variable length code we can fix the input size, or interpolate specific sections of the sparse code.
  \\
- \textbf{Swapping atoms } Another method to generate new music, is to measure the most active atoms in the dictionary of a musical section, and replace it with the most active atom in the dictionary of a distinct section. This also can be used as a tool for artist to mix and match features of ordered importance. 
+ \textbf{Swapping atoms } Another method to generate new music, is to measure the most active atoms in the dictionary of a musical section, and replace it with the most active atom in the dictionary of different musical section. This also can be used as a tool for artists to mix and match features of ordered importance. 
 
 
 %% NOTE: NLP4MusA desn't need DOI.
