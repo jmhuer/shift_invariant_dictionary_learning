@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex nlp4MusA"] 1627161938 "nlp4MusA.aux" "nlp4MusA.bbl" "nlp4MusA" 1627161939
+["bibtex nlp4MusA"] 1627165529 "nlp4MusA.aux" "nlp4MusA.bbl" "nlp4MusA" 1627165922
   "./nlp4MusA_natbib.bst" 1592458836 47607 e96542695ea41304787e3270e6f0eccf ""
   "SIDL-citations3.bib" 1627161067 42747 3ed1ab9546aa69bee3a6d438946147fa ""
-  "nlp4MusA.aux" 1627161939 4832 4654a86254767abdb62640b2d2e7937e "pdflatex"
+  "nlp4MusA.aux" 1627165896 4827 467b421d033f07c9627977fbdd6a244c "pdflatex"
   (generated)
   "nlp4MusA.bbl"
   "nlp4MusA.blg"
-["pdflatex"] 1627161938 "nlp4MusA.tex" "nlp4MusA.pdf" "nlp4MusA" 1627161939
+["pdflatex"] 1627165895 "nlp4MusA.tex" "nlp4MusA.pdf" "nlp4MusA" 1627165922
   "/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2019/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/local/texlive/2019/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm" 1136768653 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -135,13 +135,13 @@
   "images/maestro.png" 1626891280 101841 7e1a8891a810cb9a181a3c52882dcaed ""
   "images/newplot.png" 1626841097 74156 a2f6b39318298a87d278196e1d6fb339 ""
   "images/tcn.png" 1626888415 30627 4a3be45b7b57e308da3f8228458b646c ""
-  "nlp4MusA.aux" 1627161939 4832 4654a86254767abdb62640b2d2e7937e "pdflatex"
-  "nlp4MusA.bbl" 1627161938 7270 3f2bbf9392973f2849b4ad81434ea499 "bibtex nlp4MusA"
-  "nlp4MusA.out" 1627161938 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "nlp4MusA.aux" 1627165896 4827 467b421d033f07c9627977fbdd6a244c "pdflatex"
+  "nlp4MusA.bbl" 1627165530 7270 3f2bbf9392973f2849b4ad81434ea499 "bibtex nlp4MusA"
+  "nlp4MusA.out" 1627165896 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   "nlp4MusA.sty" 1625511337 22064 cb9ae4122fcfdd7a3d8ca040bdcb478c ""
-  "nlp4MusA.tex" 1627161937 24005 5333d16c65902d348221a293f02bcf8c ""
+  "nlp4MusA.tex" 1627165895 23988 373e80d0794de7c5cb1b650bc1d2f9e4 ""
   (generated)
-  "nlp4MusA.aux"
+  "nlp4MusA.pdf"
   "nlp4MusA.out"
   "nlp4MusA.log"
-  "nlp4MusA.pdf"
+  "nlp4MusA.aux"
