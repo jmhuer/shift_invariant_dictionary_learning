@@ -107,7 +107,8 @@ here $t_{i k}$ corresponds first location where $d_k$ matches our signal. Theref
 
 
 In previous works, various shift-invariant dictionary learning (SIDL) methods have been employed to discover local patterns that are embedded across a longer time series in sequential data such as audio signals. While \cite{Grosse2007} employs shift-
-invariant sparse coding with a convolutional optimization and gradient descent method for an audio classification task, \cite{Zheng2016} demonstrates an efficient algorithm with the ability to combine shift-invariant patterns in a sparse coding of the original data for audio reconstruction and classification tasks. Such unsupervised learning methods have shown to be powerful in discovering shift-invariant patterns and a handful of studies have implemented SIDL for the purpose of music. 
+invariant sparse coding with a convolutional optimization and gradient descent method for an audio classification task, \cite{Zheng2016} demonstrates an efficient algorithm with the ability to combine shift-invariant patterns in a sparse coding of the original data for audio reconstruction and classification tasks. 
+%Such unsupervised learning methods have shown to be powerful in discovering shift-invariant patterns and a handful of studies have implemented SIDL for the purpose of music. 
 
 
 
@@ -146,6 +147,12 @@ In theory, all we need to learn a dictionary is a Ecoder-Decoder 1D-Conv layers 
   \label{fig:boat1}
 \end{figure}
 
+\begin{figure*}[ht]
+  \includegraphics[width=\linewidth]{/Users/juanhuerta/personal_projects/code/shift_invariant_dictionary_learning/paper/images/newplot.png}
+  \caption{After training the model we can use it to encode datapoints of arbitrary length unsupervised stylistic segmentation. We use PCA on the average sparse code for each piece. We project into 2 dimensional sparse to visualize }
+  \label{fig:boat1}
+\end{figure*}
+
 
 
 
@@ -179,54 +186,38 @@ We use two distinct datasets: MAESTRO  \cite{hawthorne2018enabling}, and  grove 
 \end{table*}
 
 \subsection{Model Implementation}
-Our model implementation differs slightly for the different datasets used. Below are the implementation details
+Our model implementation differs slightly for the different datasets used. Below are the implementation details \\
+\textbf{Maestro Model} : We use an architecture as in figure 1. The TCN layer uses a [1,8,16,24] feature map, and we use 1000 dictionary size. We use a decaying k-WTA since this empirically improved our model accuracy. We begin with $k=95$ and decay to $k=75$ over $60$ Epochs. The Convolutions are also non-overlapping strides--meaning every kernel-length time step is only made up one column in our sparse code--this helps reduce memory requirements and help us find repeating sections over a fixed kernel length. We implemented the model in Pytorch, with MSE loss on recustruction, AdamW optimizer, and use a batch size of 1. This batch size allows us to train on variable length music since our autoencoder is fully convolutional--however our sparse representation will also be variable length. \\
+\textbf{Groove Model}  : For the Groove, drum dataset our design is We use an architecture as in figure 1 but without TCN layer, and we use 100 dictionary size. We use a decaying k-WTA since this empirically improved our model accuracy. We begin with $k=95$ and decay to $k=75$ over $60$ The Convolutions are similarly also non-overlapping strides. We implemented the model in Pytorch, with MSE loss on reconstruction, AdamW optimizer. We do not batch, we train on the full dataset. We  preprocess the dataset to match 120 bpm, 4/4 time signature and only train on 1 bar of music.  For this dataset we have good understanding of repeating time intervals and structure, unlike maestro dataset. 
 
 
-\textbf{Maestro Model} 
-\\
-For the Maestro piano dataset, our design is: 
-\\ 
-\emph{TCN [1, 8, 16, 24] - k-WTA - 1D-Conv [1000, 1] } \\
-We implement a decaying k-WTA since this empirically imporved our model accuracy. We begin with $k=95$ and decay to $k=75$ over $60$ Epochs. The Convolutions are also non-overlapping strides--meaning every kernel-length time step is only made up one column in our sparse code--this helps reduce memory requirements and help us find repeating sections over a fixed kernel length. We implemented the model in Pytorch, with MSE loss on recustruction, AdamW optimizer, and use a batch size of 1. This batch size allows us to train on variable length music since our autoencoder is fully convolutional--however our sparse representation will also be variable length.
-\\
 \begin{figure*}[ht]
   \includegraphics[width=\linewidth]{/Users/juanhuerta/personal_projects/code/shift_invariant_dictionary_learning/paper/images/maestro.png}
   \caption{After training the model we can use it to encode datapoints of arbitrary length unsupervised stylistic segmentation. We use PCA on the average sparse code for each piece. We project into 2 dimensional sparse to visualize }
   \label{fig:boat1}
 \end{figure*}
 
-\textbf{Groove Model} 
-\\
-For the Groove, drum dataset our design is: 
-\\ 
-\centerline{\emph{k-WTA - 1D-Conv [100, 1] } }\\
-We implement a decaying k-WTA since this empirically improved our model accuracy. We begin with $k=10$ and decay to $k=1$ over $1000$ Epochs. The Convolutions are similarly also non-overlapping strides. We implemented the model in Pytorch, with MSE loss on reconstruction, AdamW optimizer. We do not batch, we train on the full dataset. We  preprocess the dataset to match 120 bpm, 4/4 time signature and ony train on 1 bar of music.  For this dataset we have good understanding of repeating time intervals and structure, unlike maestro dataset. 
 
-\subsection{De-noising musical ideas}
+\subsection{Music Reconstruction}
 \label{ssec:first}
 
- \textbf{Keep Top N Dictionary words}
-
-Another application of having a sprase code, is the ability to recognize the most used words in the dictionary. Given a sparse code we can limit a piece to only be made up of the top N words. Some example applications of keeping to top N words are for example, low dimensionality feature extraction for machine learning taks; music reduction--reduction wherein the complexity of the arrangement is reduced to a simpler transcription and parts. And Music Segmentation (Discretization) wherein various musical ideas used in a piece of music are isolated from the piece itself. Such segmented ideas could be used in analysis or creatively repurposed to generate new music.
+ \textbf{De-noising musical ideas: } Dictionary learning has successfully been shown to de-noise image, videos. By simply reconstructing our musical signal. 
+\\
+ \textbf{Keep Top N Dictionary words: } Another application of having a sprase code, is the ability to recognize the most used words in the dictionary. Given a sparse code we can limit a piece to only be made up of the top N words. Some example applications of keeping to top N words are for example, low dimensionality feature extraction for machine learning taks; music reduction--reduction wherein the complexity of the arrangement is reduced to a simpler transcription and parts. And Music Segmentation (Discretization) wherein various musical ideas used in a piece of music are isolated from the piece itself. Such segmented ideas could be used in analysis or creatively repurposed to generate new music.
 
 
 \subsection{Unsupervised Stylistic Segmentation }
-\begin{figure*}[ht]
-  \includegraphics[width=\linewidth]{/Users/juanhuerta/personal_projects/code/shift_invariant_dictionary_learning/paper/images/newplot.png}
-  \caption{After training the model we can use it to encode datapoints of arbitrary length unsupervised stylistic segmentation. We use PCA on the average sparse code for each piece. We project into 2 dimensional sparse to visualize }
-  \label{fig:boat1}
-\end{figure*}
-
-
 
 If we train with a dataset that includes multiple composers we should expect to find that different composers utilize different shift invariant patters. To visualize kernel usage we average out the rows of our sparse code. This should provide us with the average dictionary word value. If we do PCA on the average dictionary vector and reduce dimensionality to 2D. We obtain the plot in Figure 2
 
-It is also possible to use this average kernel usage for each composer and make comparisons for composers, such as most similar or disimilar between styles or comparisons. 
+It is also possible to use this average kernel usage for each composer and make comparisons for composers, such as most similar or dissimilar between styles or comparisons. 
 
 
-\subsection{Genrating Structured Drums}
+\subsection{Generating New Music}
+ \textbf{Interpolating Sparse Code } We use encode existing music and interpolate between sparse code to generate new music. In order to obtain good results we measure cos similarity between sparse code to find candidates to interpolate. For drum generation we can all of our sections are same length; for piano we have variable length sprase code. To interpolate variable length code we can fix the input size, or interpolate specific sections of the sprase code. The results are significantly better for drum generation than piano generation. Although the piano generation does seem to follow high level musical features, such as key time, and scale.
+ \\
+ \textbf{Swapping atoms } Another method to generate new music, is to measure the most active atoms in the dictionary of a musical section, and replace it with the most active atom in the dictionary of a distinct section. This also can be used as a tool for artist to mix and match features of ordered importance. 
 
-If we have a specific musical structure we would like to follow. For example, 4/4 120bpm. We can train inject prior information into our 1D convolutions. For example, we can make each kernel the length of 1/4 beat. This allows for better dictionary learning since repetition is expected to happen at this time steps. We can stitch together musical sections, to create bars of music. and desing a specfic structure 
 
 %% NOTE: NLP4MusA desn't need DOI.
 % BEGIN: remove
@@ -263,17 +254,16 @@ If we have a specific musical structure we would like to follow. For example, 4/
 % END: remove
 
 
-\subsection{Genrating Piano Music }
-There are multiple benefits to this sequence learning methodology. The first is such as simplicity and felxibilty, the TCN autoencocoder is a simple to implemnt arquitecture and requires any abitrary size combinations of multivariate musical signals.
 
-\section{Discussion}
-\label{ssec:discussion}
 
-There are multiple benefits to this sequence learning methodology. The first is such as simplicity and felxibilty, the TCN autoencocoder is a simple to implemnt arquitecture and requires any abitrary size combinations of multivariate musical signals.Also the size of the model for both Magenta and Groove are 877 KB and 750 KB respectively. In comparison, googles Performance RNN--LSTM-based recurrent neural network--is ~25MB, and other transformer based models can be GBs in size. 
-
-In addition, our method allows for incorporating known structural information into a model prior to trainng. and finally we have the most imporant benifit is the sparse representatoin and learned dictionaries, as we have shown this can be used for mutiple applications and analysis. 
-
-The performance on the recustruction and generation on for the drum Grove dataset  was significantly better than the piano (MAESTRO dataset). This is in part because the dataset was pre-proccessed to match with kernel size, and the drum sections were the same length and have lower dimensionality. 
+%\section{Discussion}
+%\label{ssec:discussion}
+%
+%There are multiple benefits to this sequence learning methodology. The first is such as simplicity and felxibilty, the TCN autoencocoder is a simple to implemnt arquitecture and requires any abitrary size combinations of multivariate musical signals.Also the size of the model for both Magenta and Groove are 877 KB and 750 KB respectively. In comparison, googles Performance RNN--LSTM-based recurrent neural network--is ~25MB, and other transformer based models can be GBs in size. 
+%
+%In addition, our method allows for incorporating known structural information into a model prior to trainng. and finally we have the most imporant benifit is the sparse representatoin and learned dictionaries, as we have shown this can be used for mutiple applications and analysis. 
+%
+%The performance on the recustruction and generation on for the drum Grove dataset  was significantly better than the piano (MAESTRO dataset). This is in part because the dataset was pre-proccessed to match with kernel size, and the drum sections were the same length and have lower dimensionality. 
 
 
 
@@ -303,13 +293,16 @@ The performance on the recustruction and generation on for the drum Grove datase
 
 \section{Conclusion}
 
+%There are multiple benefits to this sequence learning methodology. The first is such as simplicity and felxibilty, the TCN autoencocoder is a simple to implemnt arquitecture and requires any abitrary size combinations of multivariate musical signals.Also the size of the model for both Magenta and Groove are 877 KB and 750 KB respectively. In comparison, googles Performance RNN--LSTM-based recurrent neural network--is ~25MB, and other transformer based models can be GBs in size. 
+%
+%In addition, our method allows for incorporating known structural information into a model prior to trainng. and finally we have the most imporant benifit is the sparse representatoin and learned dictionaries, as we have shown this can be used for mutiple applications and analysis. 
+%
+
+
 We have shown that TCN-kWTA autoencoder can learn a sparse representation of abitrary length musical signal. This shift invariant, sparse representation can be used to analyze, preprocess, or generate musical content in a structured, or unsctuctured way
 
-It is also advised to supplement non-English characters and terms
-with appropriate transliterations and/or translations
-since not all readers understand all such characters and terms.
-Inline transliteration or translation can be represented in
-the order of: original-form transliteration ``translation''.
+The performance on the recustruction and generation on for the drum Grove dataset  was significantly better than the piano (MAESTRO dataset). This is in part because the dataset was pre-proccessed to match with kernel size, and the drum sections were the same length and have lower dimensionality. 
+
 
 \section*{Acknowledgments}
 
