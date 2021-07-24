@@ -159,13 +159,7 @@ In theory, all we need to learn a dictionary is a Ecoder-Decoder 1D-Conv layers 
 \section{Experiments}
 \label{ssec:experiments}
 
-We show a few applications of our TCN k-WTA model 
-
-\begin{itemize}
-\item De-noising musical ideas 
-\item Unsupervised stylistic segmentation
-\item Music generation
-\end{itemize}
+We show a few applications of our TCN k-WTA model, De-noising musical ideas; Unsupervised stylistic segmentation; Music generation. We do this for two distinct datasets with different MIDI encodings.
 
 
 \subsection{Datasets}
@@ -187,7 +181,7 @@ We use two distinct datasets: MAESTRO  \cite{hawthorne2018enabling}, and  grove 
 
 \subsection{Model Implementation}
 Our model implementation differs slightly for the different datasets used. Below are the implementation details \\
-\textbf{Maestro Model} : We use an architecture as in figure 1. The TCN layer uses a [1,8,16,24] feature map, and we use 1000 dictionary size. We use a decaying k-WTA since this empirically improved our model accuracy. We begin with $k=95$ and decay to $k=75$ over $60$ Epochs. The Convolutions are also non-overlapping strides--meaning every kernel-length time step is only made up one column in our sparse code--this helps reduce memory requirements and help us find repeating sections over a fixed kernel length. We implemented the model in Pytorch, with MSE loss on recustruction, AdamW optimizer, and use a batch size of 1. This batch size allows us to train on variable length music since our autoencoder is fully convolutional--however our sparse representation will also be variable length. \\
+\textbf{Maestro Model} : We use an architecture as in figure 1. The TCN layer uses a [1,8,16,24] feature map, and we use 1000 dictionary size. We use a decaying k-WTA since this empirically improved our model accuracy. We begin with $k=95$ and decay to $k=75$ over $60$ Epochs. The Convolutions are non-overlapping strides--meaning every kernel-length time step is only made up one column in our sparse code--this helps reduce memory requirements and help us find repeating sections over a fixed kernel length. We implemented the model in Pytorch, with MSE loss on recustruction, AdamW optimizer, and use a batch size of 1. This batch size allows us to train on variable length music since our autoencoder is fully convolutional--however our sparse representation will also be variable length. \\
 \textbf{Groove Model}  : For the Groove, drum dataset our design is We use an architecture as in figure 1 but without TCN layer, and we use 100 dictionary size. We use a decaying k-WTA since this empirically improved our model accuracy. We begin with $k=95$ and decay to $k=75$ over $60$ The Convolutions are similarly also non-overlapping strides. We implemented the model in Pytorch, with MSE loss on reconstruction, AdamW optimizer. We do not batch, we train on the full dataset. We  preprocess the dataset to match 120 bpm, 4/4 time signature and only train on 1 bar of music.  For this dataset we have good understanding of repeating time intervals and structure, unlike maestro dataset. 
 
 
@@ -203,11 +197,10 @@ Our model implementation differs slightly for the different datasets used. Below
 
  \textbf{De-noising musical ideas: } Dictionary learning has successfully been shown to de-noise image, videos. By simply reconstructing our musical signal. 
 \\
- \textbf{Keep Top N Dictionary words: } Another application of having a sprase code, is the ability to recognize the most used words in the dictionary. Given a sparse code we can limit a piece to only be made up of the top N words. Some example applications of keeping to top N words are for example, low dimensionality feature extraction for machine learning taks; music reduction--reduction wherein the complexity of the arrangement is reduced to a simpler transcription and parts. And Music Segmentation (Discretization) wherein various musical ideas used in a piece of music are isolated from the piece itself. Such segmented ideas could be used in analysis or creatively repurposed to generate new music.
-
+ \textbf{Keep N Active Atoms: } Another application of having a sprase code, is the ability to recognize the most used words in the dictionary. Given a sparse code we can limit a piece to only be made up of the top N atoms. Some example applications of keeping top N atoms are for example, low dimensionality feature extraction for machine learning task; music reduction--reduction wherein the complexity of the arrangement is reduced to a simpler transcription and parts. 
+ %And Music Segmentation (Discretization) wherein various musical ideas used in a piece of music are isolated from the piece itself. Such segmented ideas could be used in analysis or creatively repurposed to generate new music.
 
 \subsection{Unsupervised Stylistic Segmentation }
-
 If we train with a dataset that includes multiple composers we should expect to find that different composers utilize different shift invariant patters. To visualize kernel usage we average out the rows of our sparse code. This should provide us with the average dictionary word value. If we do PCA on the average dictionary vector and reduce dimensionality to 2D. We obtain the plot in Figure 2
 
 It is also possible to use this average kernel usage for each composer and make comparisons for composers, such as most similar or dissimilar between styles or comparisons. 
