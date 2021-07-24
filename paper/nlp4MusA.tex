@@ -136,9 +136,9 @@ much longer memory.
 
 
 \subsection{SIDL by TCN K-WTA Autoencoders}
-To learn the sparse dictionaries, we use auto-encoders and more specifically the Winner-Take-All Autoencoders [11]. WTA autoencoders are similar to other autoencoders except that the goal is to learn sparse representations rather than dense ones. To achieve this goal, after training the encoder the single largest hidden activity of each feature map is kept and the rest (as well as their derivatives) are set to zero. Next, the decoder reconstructs the output from the sparse feature maps. This results in a sparse representation where the sparsity level is the number of non-zero feature maps. The key principle: \emph{If a shallow decoder (1 layer) is used, the kernel weights of the decoder are the atoms of the dictionary.}
+To learn the shift invariant dictionaries, we use a convolutional k-winner-take-all autoencoder \cite{DBLP:journals/corr/MakhzaniF14}. This is a standard convolutional autoencoder except after training the encoder, the single largest hidden activity of each feature map is kept and the rest (as well as their derivatives) are set to zero. Next, the decoder reconstructs the output from the sparse feature maps. This results in a sparse representation where the sparsity level is the number of non-zero feature maps. \emph{If a shallow decoder (1 layer) is used, the kernel weights of the decoder are the atoms of the dictionary used to reconstruct the signal}. 
 
-In theory, all we need to learn a dictionary is a Ecoder-Decoder 1D-Conv layers to generate a sprase representation. However, if our signal is dense, learning can improve if we add a TCN Block Layer to extract temporal features. This TNC block can have variable depth depending on the task.
+In theory, all we need to learn a dictionary is a Ecoder-Decoder 1D-Conv layers to generate a sprase representation. However, if our signal is dense, learning can improve if we add a TCN Layer to extract temporal features. This TNC can have variable depth depending on the task.
 
 \begin{figure}[ht]
   \includegraphics[width=\linewidth]{/Users/juanhuerta/personal_projects/code/shift_invariant_dictionary_learning/paper/images/tcn.png}
@@ -170,7 +170,7 @@ We use two distinct datasets: MAESTRO  \cite{hawthorne2018enabling}, and  grove 
     \centering
     \begin{tabular}{p{0.15\linewidth} | p{0.15\linewidth} | p{0.1\linewidth}  | p{0.45\linewidth} }
       Dataset  & Size  & Instrument &  MIDI Representation\\ \hline
-      MAESTRO  & 1020 (Hrs)   & Piano &  One-hot encoding over 388 different MIDI events. Every datapoint here has an arbitrary length \\
+      Maestro  & 1020 (Hrs)   & Piano &  One-hot encoding over 388 different MIDI events. Every datapoint here has an arbitrary length \\
         \hline
         Groove & 3.6 (Hrs)  & Drum &  T timesteps (one per 16th note) and 27 MIDI events. We use fixed length 64 time step sections\\
     \end{tabular}
@@ -179,9 +179,10 @@ We use two distinct datasets: MAESTRO  \cite{hawthorne2018enabling}, and  grove 
 \end{table*}
 
 \subsection{Model Implementation}
-Our model implementation differs slightly for the different datasets used. Below are the implementation details \\
-\textbf{Maestro Model} : We use an architecture as in figure 1. The TCN layer uses a [1,8,16,24] feature map, and we use 1000 dictionary size. We use a decaying k-WTA since this empirically improved our model accuracy. We begin with $k=95$ and decay to $k=75$ over $60$ Epochs. The Convolutions are non-overlapping strides--meaning every kernel-length time step is only made up one column in our sparse code--this helps reduce memory requirements and help us find repeating sections over a fixed kernel length. We implemented the model in Pytorch, with MSE loss on recustruction, AdamW optimizer, and use a batch size of 1. This batch size allows us to train on variable length music since our autoencoder is fully convolutional--however our sparse representation will also be variable length. \\
-\textbf{Groove Model}  : For the Groove, drum dataset our design is We use an architecture as in figure 1 but without TCN layer, and we use 100 dictionary size. We use a decaying k-WTA since this empirically improved our model accuracy. We begin with $k=95$ and decay to $k=75$ over $60$ The Convolutions are similarly also non-overlapping strides. We implemented the model in Pytorch, with MSE loss on reconstruction, AdamW optimizer. We do not batch, we train on the full dataset. We  preprocess the dataset to match 120 bpm, 4/4 time signature and only train on 1 bar of music.  For this dataset we have good understanding of repeating time intervals and structure, unlike maestro dataset. 
+Both models were implemented in Pytorch, with MSE loss on reconstruction, and AdamW optimizer. Our model implementation differs slightly for the different datasets used. Below are the implementation details
+ \\
+\textbf{Maestro Model} : We use an architecture as in figure 1. The TCN layer uses a [1,8,16,24] feature map, and we use 1000 dictionary size. We use a decaying k-WTA since this empirically improved our model accuracy. We begin with $k=95$ and decay to $k=75$ over $60$ Epochs. The Convolutions are non-overlapping strides--meaning every kernel-length time step is only made up one column in our sparse code--this helps reduce memory requirements and help us find repeating sections over a fixed kernel length. We use use a batch size of 1, this batch size allows us to train on variable length music since our autoencoder is fully convolutional--however our sparse representation will also be variable length. \\
+\textbf{Groove Model}  : For the Groove, drum dataset our design is We use an architecture as in figure 1 but without TCN layer, and we use 100 dictionary size. We use a decaying k-WTA since this empirically improved our model accuracy. We begin with $k=95$ and decay to $k=75$ over $60$ The Convolutions are similarly also non-overlapping strides. . We do not batch, we train on the full dataset. We  preprocess the dataset to match 120 bpm, 4/4 time signature and only train on 1 bar of music.  For this dataset we have good understanding of repeating time intervals and structure, unlike maestro dataset. 
 
 
 \begin{figure*}[ht]

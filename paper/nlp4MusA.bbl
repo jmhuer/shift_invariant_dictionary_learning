@@ -1,4 +1,4 @@
-\begin{thebibliography}{17}
+\begin{thebibliography}{18}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[{Blumensath and Davies(2006)}]{Blumensath2006}
@@ -72,6 +72,12 @@ Piotr Koniusz, Fei Yan, Philippe-Henri Gosselin, and Krystian Mikolajczyk.
   occurrence pooling for bags-of-words: Visual concept detection}.
 \newblock \emph{IEEE Transactions on Pattern Analysis and Machine
   Intelligence}, 39(2):313--326.
+
+\bibitem[{Makhzani and Frey(2014)}]{DBLP:journals/corr/MakhzaniF14}
+Alireza Makhzani and Brendan~J. Frey. 2014.
+\newblock \href {http://arxiv.org/abs/1409.2752} {A winner-take-all method for
+  training sparse convolutional autoencoders}.
+\newblock \emph{CoRR}, abs/1409.2752.
 
 \bibitem[{van~den Oord et~al.(2016)van~den Oord, Dieleman, Zen, Simonyan,
   Vinyals, Graves, Kalchbrenner, Senior, and Kavukcuoglu}]{oord2016wavenet}
