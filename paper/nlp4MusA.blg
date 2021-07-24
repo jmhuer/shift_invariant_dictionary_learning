@@ -10,45 +10,45 @@ Database file #1: SIDL-citations3.bib
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Warning--can't use both volume and number fields in Blumensath2006
 Warning--empty journal in Peyre2009
-You've used 19 entries,
+You've used 21 entries,
             3571 wiz_defined-function locations,
-            819 strings with 9887 characters,
-and the built_in function-call counts, 14060 in all, are:
-= -- 1131
-> -- 794
+            834 strings with 10340 characters,
+and the built_in function-call counts, 15366 in all, are:
+= -- 1238
+> -- 868
 < -- 10
-+ -- 252
-- -- 231
-* -- 988
-:= -- 2141
-add.period$ -- 74
-call.type$ -- 19
-change.case$ -- 190
-chr.to.int$ -- 19
-cite$ -- 21
-duplicate$ -- 956
-empty$ -- 964
-format.name$ -- 290
-if$ -- 3029
++ -- 275
+- -- 252
+* -- 1086
+:= -- 2349
+add.period$ -- 81
+call.type$ -- 21
+change.case$ -- 207
+chr.to.int$ -- 21
+cite$ -- 23
+duplicate$ -- 1038
+empty$ -- 1052
+format.name$ -- 317
+if$ -- 3309
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 206
-newline$ -- 97
-num.names$ -- 76
-pop$ -- 487
+missing$ -- 223
+newline$ -- 106
+num.names$ -- 84
+pop$ -- 525
 preamble$ -- 1
-purify$ -- 153
+purify$ -- 168
 quote$ -- 0
-skip$ -- 621
+skip$ -- 679
 stack$ -- 0
-substring$ -- 343
-swap$ -- 477
+substring$ -- 377
+swap$ -- 518
 text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 171
+type$ -- 189
 warning$ -- 2
-while$ -- 68
+while$ -- 75
 width$ -- 0
-write$ -- 240
+write$ -- 263
 (There were 2 warnings)

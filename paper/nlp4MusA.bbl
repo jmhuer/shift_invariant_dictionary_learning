@@ -1,5 +1,11 @@
-\begin{thebibliography}{19}
+\begin{thebibliography}{21}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[{Beckouche et~al.(2013)Beckouche, Starck, and Fadili}]{Beckouche_2013}
+S.~Beckouche, J.~L. Starck, and J.~Fadili. 2013.
+\newblock \href {https://doi.org/10.1051/0004-6361/201220752} {Astronomical
+  image denoising using dictionary learning}.
+\newblock \emph{Astronomy and Astrophysics}, 556:A132.
 
 \bibitem[{Blumensath and Davies(2006)}]{Blumensath2006}
 Thomas Blumensath and Mike Davies. 2006.
@@ -129,6 +135,12 @@ M.~Srinivas, Debaditya Roy, and C.~{Krishna Mohan}. 2014.
 \newblock {Music genre classification using on-line dictionary learning.}
 \newblock In \emph{International Joint Conference on Neural Networks (IJCNN)},
   pages 1937--1941.
+
+\bibitem[{Tang et~al.(2020)Tang, Liu, Xiao, and Sebe}]{tang2020dictionary}
+Hao Tang, Hong Liu, Wei Xiao, and Nicu Sebe. 2020.
+\newblock \href {http://arxiv.org/abs/2005.10940} {When dictionary learning
+  meets deep learning: Deep dictionary learning and coding network for image
+  recognition with limited data}.
 
 \bibitem[{Zheng et~al.(2016)Zheng, Yang, and Carbonell}]{Zheng2016}
 Guoqing Zheng, Yiming Yang, and Jaime Carbonell. 2016.
