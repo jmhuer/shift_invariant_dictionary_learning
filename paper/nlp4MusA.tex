@@ -60,9 +60,9 @@ Music temporal structure is full of shift-invariant patterns (e.g. motifs, ostin
 
 \section{Introduction}
 
-The dictionary learning framework, aims at finding a sparse representation of the input data (sparse codng) in the form of a linear combination of basic elements we call atoms. There are multiple benefits in obtaining a sparse encoding of a signal. To name a few, they are lightweight— requiring less memory to store and allowing faster inference and easier interpretability and they can encode prior knowledge in the sparsity patterns. In addition, sparsity provides a way to discern patterns in an informed and principled manner . 
+The dictionary learning framework, aims at finding a sparse representation of the input data (sparse coding) in the form of a linear combination of basic elements we call atoms. There are multiple benefits in obtaining a sparse encoding of a signal. To name a few, they are lightweight— requiring less memory to store and allowing faster inference and easier interpretability and they can encode prior knowledge in the sparsity patterns. In addition, sparsity provides a way to discern patterns in an informed and principled manner . 
 
- Sparse dictionary learning has led to state-of-art results in various image and video processing tasks as well as to texture synthesis[16] and unsupervised clustering.[Classification and clustering viadictionary learning ..] In evaluations with the Bag-of-Words model,(Vogl and Knees, 2017) (Koniuszet al., 2017) sparse coding was found empirically to outperform other coding approaches on the object category recognition tasks.  
+ Sparse dictionary learning has led to state-of-art results in various image and video processing tasks as well as to texture synthesis \cite{Peyre2009} and unsupervised clustering \cite{Ramrez2010ClassificationAC} . In evaluations with the Bag-of-Words model \cite{7439823}, sparse coding was found empirically to outperform other coding approaches on the object category recognition tasks.  
  
 The ability to dis til complex data structures such as music down to sets of dictionaries—salient features of a specific performer or music, has a multitude of applictions in music.  Music transcription and classification tasks have seen a strong usage of sparse dictionary learning in the past \cite{Grosse2007} \cite{Costantini2013}, \cite{Blumensath2006}, \cite{SrinivasM2014}, \cite{Srinivas2014}, \cite{Cogliati2016}. Nonetheless, we have yet to see a study that harnesses the advantages of sparse representation for the purpose of music creation. Instead, the popular methods for discovering music relations and achieving music generation have been a transformer with some sort of attention mechanism or the recurrent architectures. \cite{JiangJunyan2020} for instance, uses an attention module that is tailored to the discovery of sequence level relations in music, while studies like \cite{Roberts2018} uses the recurrent variational autoencoder and a hierarchical decoder in order to model long-term musical structures. In our study we explore applications of sparse representation such as de-noising musical ideas, unsupervised stylistic segmentation, and music generation.
  
@@ -125,9 +125,8 @@ an output sequence of the same length, just as with an RNN.
 
 To put it simply: TCN = 1D FCN + causal convolutions.
 
-This architecture is informed by recent convolutional architectures for sequential data (van den Oord et al., 2016;
-Kalchbrenner et al., 2016; Dauphin et al., 2017; Gehring
-et al., 2017a;b), TCN have several advantages, for example,
+This architecture is informed by recent convolutional architectures for sequential data \cite{oord2016wavenet},
+\cite{kalchbrenner2017neural} ; \cite{DBLP:journals/corr/DauphinFAG16}; \cite{Zheng2016}, TCN have several advantages, for example,
 the TCN is much simpler than WaveNet (van den Oord et al.,
 2016) (no skip connections across layers, conditioning, context stacking, or gated activations).
 Compared to the language modeling architecture of Dauphin
@@ -309,7 +308,7 @@ Include your own bib file like this:
 \verb|\bibliography{nlp4MusA}| 
 
 where \verb|nlp4MusA| corresponds to a nlp4MusA.bib file.
-\bibliography{SIDL-citations1}
+\bibliography{SIDL-citations3}
 \bibliographystyle{nlp4MusA_natbib}
 
 

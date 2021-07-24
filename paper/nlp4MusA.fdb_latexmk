@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex nlp4MusA"] 1627086415 "nlp4MusA.aux" "nlp4MusA.bbl" "nlp4MusA" 1627086835
+["bibtex nlp4MusA"] 1627097753 "nlp4MusA.aux" "nlp4MusA.bbl" "nlp4MusA" 1627097754
   "./nlp4MusA_natbib.bst" 1592458836 47607 e96542695ea41304787e3270e6f0eccf ""
-  "SIDL-citations1.bib" 1626924659 34637 8e43f9d5061258787ebafa8608e35f42 ""
-  "nlp4MusA.aux" 1627086835 3486 381b8a6a8a2a957c9a73eab7d4e89fd6 "pdflatex"
+  "SIDL-citations3.bib" 1627097748 39001 7ae2585c0513bb3f02f0779499fc7edf ""
+  "nlp4MusA.aux" 1627097754 4352 825c383012a076b31baa33201a3a5a23 "pdflatex"
   (generated)
   "nlp4MusA.blg"
   "nlp4MusA.bbl"
-["pdflatex"] 1627086834 "nlp4MusA.tex" "nlp4MusA.pdf" "nlp4MusA" 1627086835
+["pdflatex"] 1627097753 "nlp4MusA.tex" "nlp4MusA.pdf" "nlp4MusA" 1627097754
   "/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2019/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/local/texlive/2019/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm" 1136768653 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -125,13 +125,13 @@
   "images/maestro.png" 1626891280 101841 7e1a8891a810cb9a181a3c52882dcaed ""
   "images/newplot.png" 1626841097 74156 a2f6b39318298a87d278196e1d6fb339 ""
   "images/tcn.png" 1626888415 30627 4a3be45b7b57e308da3f8228458b646c ""
-  "nlp4MusA.aux" 1627086835 3486 381b8a6a8a2a957c9a73eab7d4e89fd6 "pdflatex"
-  "nlp4MusA.bbl" 1627086416 4031 3247e266db6cd82f569cfedb0f592c95 "bibtex nlp4MusA"
-  "nlp4MusA.out" 1627086834 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "nlp4MusA.aux" 1627097754 4352 825c383012a076b31baa33201a3a5a23 "pdflatex"
+  "nlp4MusA.bbl" 1627097753 6026 d9b7349395330d0e1c1c14231702fc97 "bibtex nlp4MusA"
+  "nlp4MusA.out" 1627097753 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   "nlp4MusA.sty" 1625511337 22064 cb9ae4122fcfdd7a3d8ca040bdcb478c ""
-  "nlp4MusA.tex" 1627086795 24096 68091d71f0f5754e4c2911e14d03eee8 ""
+  "nlp4MusA.tex" 1627097743 24070 0bc3d89dcd46b924fbe89f61bb193744 ""
   (generated)
-  "nlp4MusA.pdf"
-  "nlp4MusA.aux"
   "nlp4MusA.out"
+  "nlp4MusA.aux"
+  "nlp4MusA.pdf"
   "nlp4MusA.log"

@@ -1,4 +1,4 @@
-\begin{thebibliography}{11}
+\begin{thebibliography}{17}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[{Blumensath and Davies(2006)}]{Blumensath2006}
@@ -22,6 +22,13 @@ Giovanni Costantini, Massimiliano Todisco, and Renzo Perfetti. 2013.
 \newblock {NMF based dictionary learning for automatic transcription of
   polyphonic piano music}.
 \newblock \emph{WSEAS Transactions on Signal Processing}, 9(3).
+
+\bibitem[{Dauphin et~al.(2016)Dauphin, Fan, Auli, and
+  Grangier}]{DBLP:journals/corr/DauphinFAG16}
+Yann~N. Dauphin, Angela Fan, Michael Auli, and David Grangier. 2016.
+\newblock \href {http://arxiv.org/abs/1612.08083} {Language modeling with gated
+  convolutional networks}.
+\newblock \emph{CoRR}, abs/1612.08083.
 
 \bibitem[{Gillick et~al.(2019)Gillick, Roberts, Engel, Eck, and
   Bamman}]{groove2019}
@@ -49,6 +56,42 @@ Curtis Hawthorne, Andriy Stasyuk, Adam Roberts, Ian Simon, Cheng-Zhi~Anna
 \newblock {Discovering Music Relations with Sequential Attention}.
 \newblock In \emph{Proceedings of the 1st workshop on nlp for music and audio
   (nlp4musa)}, pages 1--5.
+
+\bibitem[{Kalchbrenner et~al.(2017)Kalchbrenner, Espeholt, Simonyan, van~den
+  Oord, Graves, and Kavukcuoglu}]{kalchbrenner2017neural}
+Nal Kalchbrenner, Lasse Espeholt, Karen Simonyan, Aaron van~den Oord, Alex
+  Graves, and Koray Kavukcuoglu. 2017.
+\newblock \href {http://arxiv.org/abs/1610.10099} {Neural machine translation
+  in linear time}.
+
+\bibitem[{Koniusz et~al.(2017)Koniusz, Yan, Gosselin, and
+  Mikolajczyk}]{7439823}
+Piotr Koniusz, Fei Yan, Philippe-Henri Gosselin, and Krystian Mikolajczyk.
+  2017.
+\newblock \href {https://doi.org/10.1109/TPAMI.2016.2545667} {Higher-order
+  occurrence pooling for bags-of-words: Visual concept detection}.
+\newblock \emph{IEEE Transactions on Pattern Analysis and Machine
+  Intelligence}, 39(2):313--326.
+
+\bibitem[{van~den Oord et~al.(2016)van~den Oord, Dieleman, Zen, Simonyan,
+  Vinyals, Graves, Kalchbrenner, Senior, and Kavukcuoglu}]{oord2016wavenet}
+Aaron van~den Oord, Sander Dieleman, Heiga Zen, Karen Simonyan, Oriol Vinyals,
+  Alex Graves, Nal Kalchbrenner, Andrew Senior, and Koray Kavukcuoglu. 2016.
+\newblock \href {http://arxiv.org/abs/1609.03499} {Wavenet: A generative model
+  for raw audio}.
+
+\bibitem[{Peyr{\'e}(2009)}]{Peyre2009}
+Gabriel Peyr{\'e}. 2009.
+\newblock Sparse modeling of textures.
+\newblock 34(1):17--31.
+
+\bibitem[{Ram{\'\i}rez et~al.(2010)Ram{\'\i}rez, Sprechmann, and
+  Sapiro}]{Ramrez2010ClassificationAC}
+I.~Ram{\'\i}rez, P.~Sprechmann, and G.~Sapiro. 2010.
+\newblock Classification and clustering via dictionary learning with structured
+  incoherence and shared features.
+\newblock \emph{2010 IEEE Computer Society Conference on Computer Vision and
+  Pattern Recognition}, pages 3501--3508.
 
 \bibitem[{Roberts et~al.(2018)Roberts, Engel, Raffel, Hawthorne, and
   Eck}]{Roberts2018}
