@@ -192,11 +192,8 @@ Both models were implemented in Pytorch, with MSE loss on reconstruction, and Ad
 \subsection{Unsupervised Stylistic Segmentation }
 If we train with a dataset that includes multiple composers we should expect to find that different composers utilize different shift invariant patters. To visualize kernel usage we average out the rows of our sparse code. This should provide us with the average dictionary word value. If we do PCA on the average dictionary vector and reduce dimensionality to 2D. We obtain the plot in Figure 2
 
-It is also possible to use this average kernel usage for each composer and make comparisons for composers, such as most similar or dissimilar between styles or comparisons. 
-
-
 \subsection{Generating New Music}
- \textbf{Interpolating Sparse Code } We use encode existing music and interpolate between sparse code to generate new music. In order to obtain good results we measure cos similarity between sparse code to find candidates to interpolate. For drum generation we can all of our sections are same length; for piano we have variable length sprase code. To interpolate variable length code we can fix the input size, or interpolate specific sections of the sprase code. The results are significantly better for drum generation than piano generation. Although the piano generation does seem to follow high level musical features, such as key time, and scale.
+ \textbf{Interpolating Sparse Code } We use encode existing music and interpolate between sparse code to generate new music. In order to obtain good results we measure cos similarity between sparse code to find candidates to interpolate. For drum generation all of the sections are fixed length; for piano we have variable length sprarse code. To interpolate variable length code we can fix the input size, or interpolate specific sections of the sprarse code. The results are significantly better for drum generation than piano generation. Although the piano generation does seem to follow high level musical features, such as key time, and scale.
  \\
  \textbf{Swapping atoms } Another method to generate new music, is to measure the most active atoms in the dictionary of a musical section, and replace it with the most active atom in the dictionary of a distinct section. This also can be used as a tool for artist to mix and match features of ordered importance. 
 
