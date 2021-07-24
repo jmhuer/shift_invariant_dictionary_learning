@@ -115,24 +115,13 @@ invariant sparse coding with a convolutional optimization and gradient descent m
 \subsection{Temporal Convolutional Networks (TCN) }
 
 Recent results suggest that TCNs convincingly outperform
-baseline recurrent architectures across a broad range of sequence modeling tasks.
-
-The distinguishing characteristics of TCNs are: 1)
-the convolutions in the architecture are causal, meaning that
-there is no information “leakage” from future to past; 2) the
-architecture can take a sequence of any length and map it to
-an output sequence of the same length, just as with an RNN.
+baseline recurrent architectures across a broad range of sequence modeling tasks. The characteristics of TCNs are: the convolutions in the architecture have no information “leakage” from future to past; and the architecture can take a sequence of any length and map it to
+an output sequence of the same length, similar to an RNN.
 
 To put it simply: TCN = 1D FCN + causal convolutions.
 
 This architecture is informed by recent convolutional architectures for sequential data \cite{oord2016wavenet},
-\cite{kalchbrenner2017neural} ; \cite{DBLP:journals/corr/DauphinFAG16}; \cite{Zheng2016}, TCN have several advantages, for example,
-the TCN is much simpler than WaveNet (van den Oord et al.,
-2016) (no skip connections across layers, conditioning, context stacking, or gated activations).
-Compared to the language modeling architecture of Dauphin
-et al. (2017), TCNs do not use gating mechanisms and have
-much longer memory. 
-
+\cite{kalchbrenner2017neural} ; \cite{DBLP:journals/corr/DauphinFAG16}; \cite{Zheng2016}, TCN have several advantages: they are simpler than WaveNet \cite{oord2016wavenet} since there are no skip connections across layers, conditioning, context stacking, or gated activations.
 
 
 \subsection{SIDL by TCN K-WTA Autoencoders}
