@@ -6,43 +6,43 @@ Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
 Reallocated global_strs (elt_size=20001) to 20 items from 10.
 Reallocated glb_str_end (elt_size=4) to 20 items from 10.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
-Database file #1: SIDL-citations3.bib
+Database file #1: nlp4MusA.bib
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Warning--can't use both volume and number fields in Blumensath2006
 Warning--empty journal in Peyre2009
 You've used 21 entries,
             3571 wiz_defined-function locations,
-            834 strings with 10340 characters,
-and the built_in function-call counts, 15366 in all, are:
-= -- 1238
-> -- 868
+            834 strings with 10330 characters,
+and the built_in function-call counts, 15351 in all, are:
+= -- 1239
+> -- 860
 < -- 10
-+ -- 275
-- -- 252
-* -- 1086
-:= -- 2349
-add.period$ -- 81
++ -- 272
+- -- 249
+* -- 1078
+:= -- 2342
+add.period$ -- 82
 call.type$ -- 21
-change.case$ -- 207
+change.case$ -- 206
 chr.to.int$ -- 21
 cite$ -- 23
-duplicate$ -- 1038
-empty$ -- 1052
-format.name$ -- 317
-if$ -- 3309
+duplicate$ -- 1043
+empty$ -- 1056
+format.name$ -- 314
+if$ -- 3308
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 223
-newline$ -- 106
+missing$ -- 224
+newline$ -- 107
 num.names$ -- 84
-pop$ -- 525
+pop$ -- 526
 preamble$ -- 1
-purify$ -- 168
+purify$ -- 167
 quote$ -- 0
-skip$ -- 679
+skip$ -- 684
 stack$ -- 0
 substring$ -- 377
-swap$ -- 518
+swap$ -- 517
 text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 0
@@ -50,5 +50,5 @@ type$ -- 189
 warning$ -- 2
 while$ -- 75
 width$ -- 0
-write$ -- 263
+write$ -- 265
 (There were 2 warnings)

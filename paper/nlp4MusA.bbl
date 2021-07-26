@@ -121,6 +121,13 @@ Adam Roberts, Jesse Engel, Colin Raffel, Curtis Hawthorne, and Douglas Eck.
 \newblock In \emph{35th International Conference on Machine Learning, ICML
   2018}, volume~10.
 
+\bibitem[{{Shaojie Bai} et~al.(2018){Shaojie Bai}, {J. Zico Kolter}, and
+  {Vladlen Koltun}}]{ShaojieBai2018}
+{Shaojie Bai}, {J. Zico Kolter}, and {Vladlen Koltun}. 2018.
+\newblock {An empirical evaluation of generic convolutional and recurrent
+  networks for sequence modeling.}
+\newblock \emph{arXiv preprint arXiv:1803.01271}.
+
 \bibitem[{Srinivas et~al.(2014)Srinivas, Roy, and {Krishna
   Mohan}}]{Srinivas2014}
 M.~Srinivas, Debaditya Roy, and C.~{Krishna Mohan}. 2014.
@@ -135,12 +142,6 @@ M.~Srinivas, Debaditya Roy, and C.~{Krishna Mohan}. 2014.
 \newblock {Music genre classification using on-line dictionary learning.}
 \newblock In \emph{International Joint Conference on Neural Networks (IJCNN)},
   pages 1937--1941.
-
-\bibitem[{Tang et~al.(2020)Tang, Liu, Xiao, and Sebe}]{tang2020dictionary}
-Hao Tang, Hong Liu, Wei Xiao, and Nicu Sebe. 2020.
-\newblock \href {http://arxiv.org/abs/2005.10940} {When dictionary learning
-  meets deep learning: Deep dictionary learning and coding network for image
-  recognition with limited data}.
 
 \bibitem[{Zheng et~al.(2016)Zheng, Yang, and Carbonell}]{Zheng2016}
 Guoqing Zheng, Yiming Yang, and Jaime Carbonell. 2016.
